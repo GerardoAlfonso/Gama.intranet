@@ -1,0 +1,37 @@
+*.swp
+*.*~
+proyecto.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Código de Visual Studio
+.vscode
+
+# Jinete
+.idea
+
+# Archivos específicos del usuario
+*.suo
+*.usuario
+*.userosscache
+*.sln.docstates
+
+# Generar resultados
+[Dd] ebug/
+[Dd] ebugPublic/
+[Rr] elease/
+[Rr] eleases/
+x64/
+x86/
+construir/
+Bld/
+[Bb] en/
+[Oo] bj/
+[Oo] Ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
