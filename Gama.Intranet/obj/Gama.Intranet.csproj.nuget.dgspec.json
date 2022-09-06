@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gerar\\source\\repos\\Gama.Intranet\\Gama.Intranet\\Gama.Intranet.csproj": {}
+    "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gerar\\source\\repos\\Gama.Intranet\\Gama.Intranet\\Gama.Intranet.csproj": {
+    "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gerar\\source\\repos\\Gama.Intranet\\Gama.Intranet\\Gama.Intranet.csproj",
+        "projectUniqueName": "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj",
         "projectName": "Gama.Intranet",
-        "projectPath": "C:\\Users\\gerar\\source\\repos\\Gama.Intranet\\Gama.Intranet\\Gama.Intranet.csproj",
+        "projectPath": "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj",
         "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gerar\\source\\repos\\Gama.Intranet\\Gama.Intranet\\obj\\",
+        "outputPath": "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",

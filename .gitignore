@@ -1,34 +1,34 @@
 *.swp
 *.*~
-proyecto.lock.json
+project.lock.json
 .DS_Store
 *.pyc
 nupkg/
 
-# Código de Visual Studio
+# Visual Studio Code
 .vscode
 
-# Jinete
+# Rider
 .idea
 
-# Archivos específicos del usuario
+# User-specific files
 *.suo
-*.usuario
+*.user
 *.userosscache
 *.sln.docstates
 
-# Generar resultados
-[Dd] ebug/
-[Dd] ebugPublic/
-[Rr] elease/
-[Rr] eleases/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
 x64/
 x86/
-construir/
-Bld/
-[Bb] en/
-[Oo] bj/
-[Oo] Ut/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
 msbuild.log
 msbuild.err
 msbuild.wrn
