@@ -1,0 +1,17 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Gama.Intranet.BL.DTO.GET
+{
+    public class CheckInDTO
+    {
+        [Required(ErrorMessage = "El usuario no puede estar vacio.")]
+        public string User { get; set; }
+
+        [Required(ErrorMessage = "La contraseña no puede estar vacio.")]
+        public string Password { get; set; }
+
+
+
+
+    }
+}
