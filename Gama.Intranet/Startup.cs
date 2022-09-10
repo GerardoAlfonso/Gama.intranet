@@ -1,3 +1,5 @@
+using Gama.Intranet.BL.DAO;
+using Gama.Intranet.BL.Implements;
 using Gama.Intranet.DAL;
 using Gama.Intranet.Management;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -63,8 +65,9 @@ namespace Gama.Intranet
                 };
             });
 
-
+            services.AddScoped<AuthDAO, AuthImplement>();
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,10 +84,11 @@ namespace Gama.Intranet
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("AllowOrigin");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
