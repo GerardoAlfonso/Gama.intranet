@@ -36,7 +36,8 @@ namespace Gama.Intranet
 
 
             // string Connection
-            services.AddDbContext<ApplicationDBContext>(opts => opts.UseSqlServer(crypto.Decrypt(Configuration["ConnectionStrings: GammaIntranet_Context"])));
+            //services.AddDbContext<ApplicationDBContext>(opts => opts.UseSqlServer(crypto.Decrypt(Configuration["ConnectionStrings: GammaIntranet_Context"])));
+            services.AddDbContext<ApplicationDBContext>(opts => opts.UseSqlServer(Configuration["ConnectionStrings:GamaIntranet_Context"]));
 
             // services cors
             services.AddCors(c =>

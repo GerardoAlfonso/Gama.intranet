@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Gama.Intranet.BL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gama.Intranet.DAL
 {
@@ -10,7 +11,7 @@ namespace Gama.Intranet.DAL
 
 
         // Catalogue
-
+        public DbSet<Usuario> Usuario { get; set; }
 
         // Admin
 

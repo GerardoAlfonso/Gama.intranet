@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Gama.Intranet.BL.DTO.GET
+namespace Gama.Intranet.BL.DTO.Request
 {
     public class CheckInDTO
     {
