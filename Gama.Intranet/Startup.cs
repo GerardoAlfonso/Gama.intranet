@@ -85,6 +85,7 @@ namespace Gama.Intranet
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
             app.UseCors("AllowOrigin");

@@ -12,6 +12,11 @@ namespace Gama.Intranet.DAL
 
         // Catalogue
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Logs> Logs { get; set; }
+        public DbSet<Folders> Folders { get; set; }
+        public DbSet<UsuariosPermisosFolders> UsuariosPermisosFolders { get; set; }
+        public DbSet<ParametrosGenerales> ParametrosGenerales { get; set; }
 
         // Admin
 

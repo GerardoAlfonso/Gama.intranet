@@ -6,6 +6,7 @@ using Gama.Intranet.Management;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 
 namespace Gama.Intranet.Controllers
 {
@@ -73,6 +74,19 @@ namespace Gama.Intranet.Controllers
                 logIn.Token = null;
                 return BadRequest(logIn);
             }
+        }
+
+        [HttpGet]
+        [Route("Test")]
+        public IActionResult Test()
+        {
+            string directorio = @"C:\Users\gerar\Desktop\Test";
+
+            //string[] ficheros = Directory.GetFiles(directorio);
+
+            string[] fileArray = Directory.GetFiles(directorio, "*.*", SearchOption.TopDirectoryOnly);
+
+            return Ok(fileArray);
         }
     }
 }
