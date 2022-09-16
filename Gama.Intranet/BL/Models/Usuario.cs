@@ -11,14 +11,16 @@ namespace Gama.Intranet.BL.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-        public int Status { get; set; }
-        public int LoginAttempts { get; set; }
-        public int Role { get; set; }
-        public DateTime LastAccess { get; set; }
-        public DateTime LastAttempDate { get; set; }
-        public int UserCreation { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public int? Status { get; set; }
+        public int? LoginAttempts { get; set; }
+        public int? Role { get; set; }
+        public string Token { get; set; }
+        public Boolean ShouldChangePassword { get; set; }
+        public DateTime? LastAccess { get; set; }
+        public DateTime? LastAttempDate { get; set; }
+        public int? UserCreation { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
     }
 }

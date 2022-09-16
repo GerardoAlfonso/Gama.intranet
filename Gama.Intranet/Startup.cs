@@ -67,6 +67,7 @@ namespace Gama.Intranet
             });
 
             services.AddScoped<AuthDAO, AuthImplement>();
+            services.AddScoped<AdminDAO, AdminImplement>();
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             
         }
@@ -85,6 +86,7 @@ namespace Gama.Intranet
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
