@@ -11,6 +11,7 @@ namespace Gama.Intranet.BL.DAO
     {
         Usuario getUserInfo(string username);
         Usuario LogIn(CheckInDTO usuario);
+        int LogOut(Usuario usuario);
         Usuario ChangePassword(Usuario DBEntity, ChangePasswordDTO usuario);
 
     }

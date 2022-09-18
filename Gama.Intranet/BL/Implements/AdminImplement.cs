@@ -24,7 +24,7 @@ namespace Gama.Intranet.BL.Implements
 
         public List<Usuario> getAll()
         {
-            throw new System.NotImplementedException();
+            return context.Usuario.ToList();
         }
 
         public Usuario getById(long id)
@@ -46,6 +46,15 @@ namespace Gama.Intranet.BL.Implements
             entity.ShouldChangePassword = true;
             context.SaveChanges();
             return password;
+        }
+
+        public List<Usuario> GetUsers()
+        {
+            return context.Usuario.Where(x => x.Status == 1).ToList();
+        }
+        public List<Usuario> GetAllUsers()
+        {
+            return context.Usuario.ToList();
         }
 
         public int update(Usuario DBEntity, Usuario entity)

@@ -68,6 +68,7 @@ namespace Gama.Intranet
 
             services.AddScoped<AuthDAO, AuthImplement>();
             services.AddScoped<AdminDAO, AdminImplement>();
+            services.AddScoped<LogsDAO, LogsImplement>();
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             
         }

@@ -28,10 +28,18 @@ CREATE TABLE Roles(
 )
 CREATE TABLE Logs(
     [Id][INT] IDENTITY(1,1) NOT NULL,
+    [IdLogStatus][INT] NULL,
     [Page][VARCHAR](255) NULL,
     [Description][VARCHAR](MAX) NULL,
     --[IP][VARCHAR](25) NULL,
     [UserCreation][INT] NULL,
+    [CreatedAt][DATETIME] NULL,
+    [UpdatedAt][DATETIME] NULL
+)
+
+CREATE TABLE LogStatus(
+    [Id][INT] IDENTITY(1,1) NOT NULL,
+    [Name][VARCHAR](255) NULL,
     [CreatedAt][DATETIME] NULL,
     [UpdatedAt][DATETIME] NULL
 )
@@ -59,13 +67,17 @@ CREATE TABLE ParametrosGenerales(
 )
 
 select * from usuario
+SELECT * FROM Logs
 
 insert into Usuario ([Name],[Password], [Status], [Role], [LoginAttempts], [ShouldChangePassword])
-VALUES ('Gerardo', 'b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79', 1, 1, 0, 0)
+VALUES ('Gerardo', 'b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79', 0, 1, 0, 0)
 insert into Usuario ([Name],[Password], [Status], [Role], [LoginAttempts], [ShouldChangePassword])
 VALUES ('Alfonso', 'ASDF', 1, 2, 0, 0)
 
+
+
 -- truncate table usuario
+-- truncate table logs
 
 update usuario 
 set [Status] = 1

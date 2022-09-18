@@ -51,6 +51,7 @@ namespace Gama.Intranet.BL.Implements
                 user.LastAccess = DateTime.Now;
                 user.LoginAttempts = 0;
                 user.Token = Crypto.CreateJWT(user.Name, (int)user.Role);
+
                 context.SaveChanges();
                 return user;
             }
@@ -73,6 +74,13 @@ namespace Gama.Intranet.BL.Implements
             }
         }
 
+        public int LogOut(Usuario usuario)
+        {
+            usuario.Token = null;
+            context.SaveChanges();
+            return usuario.Id;
+        }
+
         public Usuario ChangePassword(Usuario DBEntity, ChangePasswordDTO usuario)
         {
             DBEntity.Password = usuario.Password;
@@ -80,6 +88,7 @@ namespace Gama.Intranet.BL.Implements
             DBEntity.LastAccess = DateTime.Now;
             DBEntity.LoginAttempts = 0;
             DBEntity.ShouldChangePassword = false;
+
             context.SaveChanges();
 
             return DBEntity;
@@ -89,5 +98,7 @@ namespace Gama.Intranet.BL.Implements
         {
             throw new System.NotImplementedException();
         }
+
+       
     }
 }
