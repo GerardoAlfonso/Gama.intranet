@@ -79,7 +79,6 @@ namespace Gama.Intranet.Controllers
             return Ok(adminDAO.ResetPasswordUser(user.Id));
         }
 
-       
 
         
 

@@ -1,71 +1,119 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿/* spinner */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
+@keyframes ldio-ksmwx8uvgh8 {
+    0% {
+        opacity: 1
+    }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+    100% {
+        opacity: 0
+    }
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.ldio-ksmwx8uvgh8 div {
+    left: 94px;
+    top: 48px;
+    position: absolute;
+    animation: ldio-ksmwx8uvgh8 linear 1s infinite;
+    background: #0c71c3;
+    width: 12px;
+    height: 24px;
+    border-radius: 6px / 12px;
+    transform-origin: 6px 52px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.ldio-ksmwx8uvgh8 div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -0.9166666666666666s;
+    background: #0c71c3;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.ldio-ksmwx8uvgh8 div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -0.8333333333333334s;
+    background: #0c71c3;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.ldio-ksmwx8uvgh8 div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.75s;
+    background: #0c71c3;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.ldio-ksmwx8uvgh8 div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.6666666666666666s;
+    background: #0c71c3;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.ldio-ksmwx8uvgh8 div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.5833333333333334s;
+    background: #0c71c3;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+.ldio-ksmwx8uvgh8 div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.5s;
+    background: #0c71c3;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+.ldio-ksmwx8uvgh8 div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.4166666666666667s;
+    background: #0c71c3;
 }
+
+.ldio-ksmwx8uvgh8 div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.3333333333333333s;
+    background: #0c71c3;
+}
+
+.ldio-ksmwx8uvgh8 div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.25s;
+    background: #0c71c3;
+}
+
+.ldio-ksmwx8uvgh8 div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.16666666666666666s;
+    background: #0c71c3;
+}
+
+.ldio-ksmwx8uvgh8 div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.08333333333333333s;
+    background: #0c71c3;
+}
+
+.ldio-ksmwx8uvgh8 div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+    background: #0c71c3;
+}
+
+.loadingio-spinner-spinner-sz4nt59ycj {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 0px auto;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.ldio-ksmwx8uvgh8 {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
+
+.ldio-ksmwx8uvgh8 div {
+    box-sizing: content-box;
+}
+
+/* */
