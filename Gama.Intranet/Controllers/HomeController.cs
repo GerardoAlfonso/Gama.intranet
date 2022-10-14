@@ -38,5 +38,9 @@ namespace Gama.Intranet.Controllers
         {
             return View();
         }
+        public IActionResult PortalDocumental()
+        {
+            return View();
+        }
     }
 }
