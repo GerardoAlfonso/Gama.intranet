@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@5.2.1",
+      "destination": "wwwroot/twitter-bootstrap/"
+    },
+    {
+      "library": "jquery-validate@1.19.5",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "library": "izimodal@1.6.1",
+      "destination": "wwwroot/lib/izimodal/"
+    },
+    {
+      "library": "font-awesome@6.2.0",
+      "destination": "wwwroot/lib/font-awesome/"
+    }
+  ]
+}
