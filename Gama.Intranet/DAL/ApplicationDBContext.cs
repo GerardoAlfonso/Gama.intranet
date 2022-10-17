@@ -19,12 +19,14 @@ namespace Gama.Intranet.DAL
         public DbSet<ParametrosGenerales> ParametrosGenerales { get; set; }
         public DbSet<LogStatus> LogStatuses { get; set; }
 
+        public DbSet<ContenidoHtml> ContenidoHtml { get; set; }
+
         // Admin
 
 
         // Routes
 
-        
+
         // Logs
 
 
