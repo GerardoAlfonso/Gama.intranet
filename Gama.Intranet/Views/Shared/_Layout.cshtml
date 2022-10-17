@@ -13,10 +13,18 @@
     @RenderSection("Styles", required: false)
 
 </head>
-<body>
+<body class="sidebar-closed sidebar-collapse">
+    <style>
+        .main-footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 40px;
+        }
+    </style>
 
     <partial name="_Navbar" />
-    <partial name="_Sidebar" /> 
+    @*<partial name="_Sidebar" /> *@
     @RenderBody()
     <partial name="_Footer" />
 

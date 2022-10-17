@@ -1,4 +1,6 @@
-﻿using Gama.Intranet.Models;
+﻿using Gama.Intranet.BL.DAO;
+using Gama.Intranet.BL.DTO.Request;
+using Gama.Intranet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

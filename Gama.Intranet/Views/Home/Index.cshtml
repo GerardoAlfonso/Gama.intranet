@@ -1,81 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    Layout = null;
+    //Layout = null;
+
 }
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication1</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css">
 
-</head>
-<body class="sidebar-closed sidebar-collapse">
-    <style>
-        .main-footer {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 40px;
-        }
-    </style>
-    <partial name="_Navbar" />
-    
-    <div class="">
+ <div class="">
+    <div class="" style="margin-left: 10%; margin-right: 10%;">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 text-center">
+                <div class="nav flex-column nav-pills" id="SideBarOptions" role="tablist" aria-orientation="vertical">
+                    <img src="~/img/logo-grupo-gama.png" alt="" class="mx-auto w-75 my-5"  id="logo-sidebar"/>
 
-        <div class="" style="margin-left: 10%; margin-right: 10%;">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 text-center">
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <img src="~/img/logo-grupo-gama.png" alt="" class="mx-auto w-75 my-5" />
-                        <a class="nav-link mx-auto my-3 h3 w-50 active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Vision</a>
-                        <a class="nav-link mx-auto my-3 h3 w-50" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Mision</a>
-                        <a class="nav-link mx-auto my-3 h3 w-50" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="true">Valores</a>
-                    </div>
-                </div>
-                <div class="col-lg-9 col-md-8">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade active show my-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <p>asdfasdf </p>
-                            <p>asdfasdf </p>
-                            <p>asdfasdf </p>
-                        </div>
-                        <div class="tab-pane fade my-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" _mstvisible="1">
-                            <p> Culpa dolor voluptate do laboris laboris irure reprehenderit id incididunt duis pariatur mollit aute magna pariatur consectetur. Eu veniam duis non ut dolor deserunt commodo et minim in quis laboris ipsum velit id veniam. Quis ut consectetur adipisicing officia excepteur non sit. Ut et elit aliquip labore Lorem enim eu. Ullamco mollit occaecat dolore ipsum id officia mollit qui esse anim eiusmod do sint minim consectetur qui.</p>
-                        </div>
-                        <div class="tab-pane fade my-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" _mstvisible="0">
-                            <p> Fugiat id quis dolor culpa eiusmod anim velit excepteur proident dolor aute qui magna. Ad proident laboris ullamco esse anim Lorem Lorem veniam quis Lorem irure occaecat velit nostrud magna nulla. Velit et et proident Lorem do ea tempor officia dolor. Reprehenderit Lorem aliquip labore est magna commodo est ea veniam consectetur.</p>
-                        </div>
-                        <div class="tab-pane fade my-5" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" _msthidden="0">
-                            <p> Eu dolore ea ullamco dolore Lorem id cupidatat excepteur reprehenderit consectetur elit id dolor proident in cupidatat officia. Voluptate excepteur commodo labore nisi cillum duis aliqua do. Aliqua amet qui mollit consectetur nulla mollit velit aliqua veniam nisi id do Lorem deserunt amet. Culpa ullamco sit adipisicing labore officia magna elit nisi in aute tempor commodo eiusmod.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <div class="col-lg-9 col-md-8">
+                <div class="tab-content" id="v-pills-tabContent">
 
-            <div class="my-5 dynamic-container" id="dynamic-container">
-                <p>contenido dinamico </p>
+                </div>
             </div>
+        </div>
 
+        
 
+    </div>
+    <div style="margin-left: 10%; margin-right: 10%;">
+        <div class="my-5 dynamic-container" id="dynamic-container">
+            
         </div>
     </div>
+</div>
 
-    <partial name="_Footer" />
-
-    <!-- jQuery -->
-    <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-</html>
+@section Scripts{
+    <script src="~/js/Home.js" asp-append-version="true"></script>
+}
