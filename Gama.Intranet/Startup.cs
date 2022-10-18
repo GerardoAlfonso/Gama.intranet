@@ -70,6 +70,7 @@ namespace Gama.Intranet
             services.AddScoped<AdminDAO, AdminImplement>();
             services.AddScoped<LogsDAO, LogsImplement>();
             services.AddScoped<ContentHtmlDAO, ContentHtmlImplement>();
+            services.AddScoped<FilesDAO, FilesImplement>();
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             
         }
