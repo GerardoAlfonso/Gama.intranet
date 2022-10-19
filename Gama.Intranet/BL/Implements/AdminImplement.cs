@@ -50,7 +50,8 @@ namespace Gama.Intranet.BL.Implements
 
         public List<Usuario> GetUsers()
         {
-            return context.Usuario.Where(x => x.Status == 1).ToList();
+            //return context.Usuario.Where(x => x.Status == 1).ToList();
+            return context.Usuario.ToList();
         }
         public List<Usuario> GetAllUsers()
         {

@@ -10,6 +10,7 @@ namespace Gama.Intranet.BL.DTO.Request
         [Required(ErrorMessage = "La contraseña no puede estar vacio.")]
         public string Password { get; set; }
 
+        public int IdUser { get; set; }
 
 
 

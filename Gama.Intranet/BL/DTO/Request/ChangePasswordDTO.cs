@@ -12,5 +12,7 @@ namespace Gama.Intranet.BL.DTO.Request
 
         [Required(ErrorMessage = "Token no valido")]
         public string Token { get; set; }
+
+        public int IdUser { get; set; }
     }
 }
