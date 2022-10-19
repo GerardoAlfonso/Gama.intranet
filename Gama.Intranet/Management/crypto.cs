@@ -71,7 +71,7 @@ namespace Gama.Intranet.Management
         }
 
         //
-        public static string CreateJWT(string user, int role)
+        public static string CreateJWT(string user, int role, int id)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             //var secretKey = _secretKey;
@@ -81,6 +81,7 @@ namespace Gama.Intranet.Management
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("user", user),
+                    new Claim("id", id.ToString()),
                     new Claim(ClaimTypes.Role, Convert.ToString(role)),
                     new Claim("fechaIngreso", DateTime.UtcNow.ToString("MM-dd-yyyy"))
                 }),

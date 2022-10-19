@@ -50,7 +50,7 @@ namespace Gama.Intranet.BL.Implements
             {
                 user.LastAccess = DateTime.Now;
                 user.LoginAttempts = 0;
-                user.Token = Crypto.CreateJWT(user.Name, (int)user.Role);
+                user.Token = Crypto.CreateJWT(user.Name, (int)user.Role, usuario.IdUser);
 
                 context.SaveChanges();
                 return user;
@@ -84,7 +84,7 @@ namespace Gama.Intranet.BL.Implements
         public Usuario ChangePassword(Usuario DBEntity, ChangePasswordDTO usuario)
         {
             DBEntity.Password = usuario.Password;
-            DBEntity.Token = Crypto.CreateJWT(DBEntity.Name, (int)DBEntity.Role);
+            DBEntity.Token = Crypto.CreateJWT(DBEntity.Name, (int)DBEntity.Role, DBEntity.Id);
             DBEntity.LastAccess = DateTime.Now;
             DBEntity.LoginAttempts = 0;
             DBEntity.ShouldChangePassword = false;

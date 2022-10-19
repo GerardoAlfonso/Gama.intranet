@@ -42,14 +42,14 @@
                 <li class="breadcrumb-item active" aria-current="page">Data</li>
               </ol>
 </nav>
-            <div class="row">
+            <div class="row" id="files-area">
                 <div class="col-lg-3 mb-2">
                     <div class="service-item rounded p-4 mb-4">
                         <center><i class="fa fa-3x fa-folder-open text-primary mb-4" id="hed-icono"></i></center> 
-                        <center><h4 class="mb-4">PLANNING <span class="d-block text-body"></span></h4></center>
+                        <center><h4 class="mb-4">PLANNING 1<span class="d-block text-body"></span></h4></center>
                         <center><p class="m-0">Vero amet vero eos kasd justo ipsum diam sed elitr</p></center> 
                         <br />
-                        <center><button type="button" class="btn btn-info" onclick="alert()" data-toggle="button" aria-pressed="false" autocomplete="off">ABRIR</button></center> 
+                        <center><button type="button" class="btn btn-info" onclick="OpenFolder()" data-toggle="button" aria-pressed="false" autocomplete="off">ABRIR</button></center> 
                     </div>
                 </div>
                 
@@ -113,6 +113,7 @@
     <!-- AdminLTE App -->
     <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/root.js" asp-append-version="true"></script>
+    <script src="~/js/PortalDocumental.js" asp-append-version="true"></script>
 </body>
 </html>

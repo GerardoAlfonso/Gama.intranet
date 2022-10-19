@@ -52,7 +52,7 @@ namespace Gama.Intranet.Controllers
                     logsDAO.WriteLog(new Logs(2, "Login", "Intento de inicio de sesion con un usuario inactivo", result.Id, DateTime.Now));
                     return Ok(logIn);
                 }
-
+                dto.IdUser = result.Id;
                 Usuario _loggedUser = authDAO.LogIn(dto);
 
                 if (_loggedUser != null && _loggedUser.LoginAttempts != 0)
@@ -172,7 +172,7 @@ namespace Gama.Intranet.Controllers
 
                 Usuario user = authDAO.ChangePassword(result, _user);
                 logIn.Status = 1;
-                logIn.Message = "La contraseña se cambio con exito";
+                logIn.Message = "La contraseña se cambio    con exito";
                 logIn.Token = user.Token;
 
                 return Ok(logIn);
