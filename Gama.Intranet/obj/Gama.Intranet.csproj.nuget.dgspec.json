@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj": {}
+    "C:\\Users\\kevin\\Downloads\\pr\\Gama.Intranet\\Gama.Intranet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj": {
+    "C:\\Users\\kevin\\Downloads\\pr\\Gama.Intranet\\Gama.Intranet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj",
+        "projectUniqueName": "C:\\Users\\kevin\\Downloads\\pr\\Gama.Intranet\\Gama.Intranet.csproj",
         "projectName": "Gama.Intranet",
-        "projectPath": "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj",
-        "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gerar\\Desktop\\Gama.intranet\\Gama.intranet\\Gama.Intranet\\obj\\",
+        "projectPath": "C:\\Users\\kevin\\Downloads\\pr\\Gama.Intranet\\Gama.Intranet.csproj",
+        "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kevin\\Downloads\\pr\\Gama.Intranet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

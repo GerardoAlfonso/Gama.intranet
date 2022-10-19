@@ -2994,3 +2994,6 @@ table.table .avatar {
 .success {
     background-color: green !important;
 }
+.exampleModalLabel {
+    color: white;
+}

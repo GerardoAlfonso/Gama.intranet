@@ -1,7 +1,9 @@
-﻿public function alert() {
-    alert("Mandar a llamar la pagina");
+﻿ function alert() {
+     if ($('#name').val().length == 0) {
+         console.log('HOLA MUNDO');
+         return
+     }
 }
 
-$(document).ready(function () {
-    $('#example').DataTable();
-});
+
+

@@ -16,15 +16,18 @@ Layout = null;
   <link rel="stylesheet" href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href=~/css/admin.css/> <script src="~/js~/js/admin.js">
-  </script>
+  <link rel="stylesheet" href=~/css/admin.css/>
+  <script src="~/js~/js/admin.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-
+  <script src="sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
@@ -37,6 +40,7 @@ Layout = null;
       width: 100%;
       height: 40px;
     }
+
   </style>
   <partial name="_Navbar" />
 
@@ -48,11 +52,12 @@ Layout = null;
           <div class="table-title">
             <div class="row">
               <div class="col-sm-4">
-                <h2 class="enca">Mantenimiento de  <b>Usuarios</b></h2>
+                <h2 class="enca">Mantenimiento de <b>Usuarios</b></h2>
               </div>
               <div class="col-sm-8">
                 <!-- Vertically centered modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Nuevo</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"><b>Agregar Nuevo</b></button>
               </div>
             </div>
           </div>
@@ -79,7 +84,7 @@ Layout = null;
               </div>
             </div>
           </div>
-          <table class="table table-striped table-hover"  id="example">
+          <table class="table table-striped table-hover" id="example">
             <thead>
               <tr>
                 <th>#</th>
@@ -92,90 +97,152 @@ Layout = null;
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
-                <td><a href="#">Michael Holz</a>
-                </td>
-                <td>London</td>
-                <td>Jun 15, 2017</td>
-                <td><span class="status text-success">&bull;</span> Delivered</td>
-               <td><a href="#" class="view" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xe065</i></a></td>
-                <td><a href="#" class="view" title="Desahabilitar" data-toggle="tooltip"><i class="material-icons">&#xe872;	</i></a></td
-
-
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><a href="#"> Paula Wilson</a>
-                </td>
-                <td>Madrid</td>
-                <td>Jun 21, 2017</td>
-                <td><span class="status text-info">&bull;</span> Shipped</td>
-                <td><a href="#" class="view" title="Editar" data-toggle="tooltip"><i class="material-icons">&#xe065</i></a></td>
-                <td><a href="#" class="view" title="Desahabilitar" data-toggle="tooltip"><i class="material-icons">&#xe872;	</i></a></td
-              </tr>
-
-            </tbody>
-          </table>
-          <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-              <li class="page-item disabled"><a href="#">Previous</a></li>
-              <li class="page-item"><a href="#" class="page-link">1</a></li>
-              <li class="page-item"><a href="#" class="page-link">2</a></li>
-              <li class="page-item"><a href="#" class="page-link">3</a></li>
-              <li class="page-item active"><a href="#" class="page-link">4</a></li>
-              <li class="page-item"><a href="#" class="page-link">5</a></li>
-              <li class="page-item"><a href="#" class="page-link">6</a></li>
-              <li class="page-item"><a href="#" class="page-link">7</a></li>
-              <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-          </div>
+                    <td>1</td>
+                    <td><a href="#">Michael Holz</a>
+                    </td>
+                    <td>London</td>
+                    <td>Jun 15, 2017</td>
+                    <td><span class="status text-success">&bull;</span> Delivered</td>
+                    <td><a href="#" class="view" title="Editar" data-toggle="tooltip"><i
+                          class="material-icons">&#xe065</i></a></td>
+                    <td><a href="#" class="view" title="Desahabilitar" data-toggle="tooltip"><i
+                          class="material-icons">&#xe872; </i></a></td 
+                </tr>
+                 <tr>
+                    <td>2</td>
+                    <td><a href="#"> Paula Wilson</a>
+                    </td>
+                    <td>Madrid</td>
+                    <td>Jun 21, 2017</td>
+                    <td><span class="status text-info">&bull;</span> Shipped</td>
+                    <td><a href="#" class="view" title="Editar" data-toggle="tooltip"><i
+                          class="material-icons">&#xe065</i></a></td>
+                    <td><a href="#" class="view" title="Desahabilitar" data-toggle="tooltip"><i
+                          class="material-icons">&#xe872; </i></a></td 
+                 </tr> 
+                 </tbody>
+                </table>
+                <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <ul class="pagination">
+                  <li class="page-item disabled"><a href="#">Previous</a></li>
+                  <li class="page-item"><a href="#" class="page-link">1</a></li>
+                  <li class="page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="page-item"><a href="#" class="page-link">3</a></li>
+                  <li class="page-item active"><a href="#" class="page-link">4</a></li>
+                  <li class="page-item"><a href="#" class="page-link">5</a></li>
+                  <li class="page-item"><a href="#" class="page-link">6</a></li>
+                  <li class="page-item"><a href="#" class="page-link">7</a></li>
+                  <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
         </div>
       </div>
     </div>
   </div>
-
   </div>
 
   <partial name="_Footer" />
 
- <!-- jQuery -->
-<script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
   <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="~/js/site.js" asp-append-version="true"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+  
 
 </body>
 
- <!-- MODAL -->
-
+<!-- MODAL -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+      <div class="modal-header bg-primary">
+        <h5 class="exampleModalLabel" id="exampleModalLabel">Administracion de <b>Usuario</b></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
+          <div class="row p-2">
+            <div class="col">
+              <label class="form-label">id</label>
+              <input type="text" class="form-control" id="iduser" aria-label="name" disabled>
+            </div>
+            <div class="col">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="name" placeholder="Ingrese el nombre" aria-label="name" required />
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+          <div class="row p-2">
+            <div class="col">
+              <label class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" placeholder="Ingrese la contraseña" required
+                aria-label="name" />
+            </div>
+
+            <div class="col">
+              <label class="form-label">Status</label>
+              <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1 status">
+                  <option>Activo</option>
+                  <option>Desahabilitado</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col">
+              <label class="form-label">Role</label>
+              <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1 role" required>
+                  <option>Administrador</option>
+                  <option>Usuario</option>
+                  <option>Cliente</option>
+                  <option>Vendedor</option>
+                  <option>Cajero</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col">
+              <label class="form-label">Token</label>
+              <input type="text" class="form-control" id="token" aria-label="name" required/>
+            </div>
+          </div>
+
+          <div class="row p-2">
+            <div class="col">
+              <label class="form-label">LastAccess</label>
+              <input type="password" class="form-control" id="LastAccess" aria-label="name"required />
+            </div>
+            <br />
+            <div class="col">
+              <label class="form-label">LastAttempDate</label>
+              <input type="text" class="form-control" id="LastAttempDate" aria-label="name" required/>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col">
+              <label class="form-label">User Creation</label>
+              <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1 role">
+                  <option>Administrador</option>
+                  <option>Kevin</option>
+                  <option>Steff</option>
+                  <option>Rudy</option>
+                  <option>Cajero</option>
+                </select>
+              </div>
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success" onclick="alert()">Guardar</button>
+
       </div>
     </div>
   </div>
