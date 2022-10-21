@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YwFUYRd5OTdEEkGsXK3EOf2KiFENOBm8APHa5344/YRhLMJrFAvcc3uAr7jYVGaZc6U4SxnKOVACLIalAPzrjw==",
+  "dgSpecHash": "2/McNRm5ZfWD2ce4sJAsjTx12rBHifYTnAs0sI6paRW6/hQ2teSllp94TjV9UMHSr8o7WRse/anoOAFK2nwhHg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kevin\\Downloads\\pr\\Gama.Intranet\\Gama.Intranet.csproj",
+  "projectFilePath": "C:\\Users\\kevin\\Downloads\\respñ\\Gama.intranet\\Gama.Intranet\\Gama.Intranet.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kevin\\.nuget\\packages\\efcore.bulkextensions\\3.1.0\\efcore.bulkextensions.3.1.0.nupkg.sha512",
     "C:\\Users\\kevin\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
