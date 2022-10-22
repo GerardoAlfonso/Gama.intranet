@@ -59,8 +59,8 @@ namespace Gama.Intranet.Controllers
 
                 fileResponseDTO.Status = 1;
                 fileResponseDTO.Message = "Success";
-                fileResponseDTO.Folders = GetFolders(route);
-                fileResponseDTO.Files = GetFiles(route);
+                fileResponseDTO.Folders = GetFolders(path);
+                fileResponseDTO.Files = GetFiles(path);
 
             }
             catch(Exception ex)
