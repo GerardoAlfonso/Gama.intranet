@@ -52,7 +52,8 @@ namespace Gama.Intranet.Controllers
             FileResponseDTO fileResponseDTO = new FileResponseDTO();
             try
             {
-                string route = RoutePublicFiles(null);
+                //string route = RoutePublicFiles(null);
+                string route = @"C:\Users\";
                 // get host route
                 string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
