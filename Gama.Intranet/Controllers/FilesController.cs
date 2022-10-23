@@ -2,6 +2,7 @@
 using Gama.Intranet.BL.DTO.Request;
 using Gama.Intranet.BL.DTO.Response;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,14 @@ namespace Gama.Intranet.Controllers
     public class FilesController : ControllerBase
     {
         private readonly FilesDAO filesDAO;
+        private readonly IWebHostEnvironment environment;
+        
 
-        public FilesController(FilesDAO filesDAO)
+        public FilesController(FilesDAO filesDAO, IWebHostEnvironment hostEnvironment)
         {
             this.filesDAO = filesDAO;
+            environment = hostEnvironment;
         }
-
 
         //
         [HttpGet]
@@ -75,8 +78,8 @@ namespace Gama.Intranet.Controllers
         }
 
         [HttpPost]
-        [Route("GetFilesToFolder")]
-        public IActionResult GetFilesToFolder(GetFilesDTO filesDTO)
+        [Route("GetPublicFilesToFolder")]
+        public IActionResult GetPublicFilesToFolder(GetFilesDTO filesDTO)
         {
             FileResponseDTO fileResponseDTO = new FileResponseDTO();
             try
@@ -132,6 +135,25 @@ namespace Gama.Intranet.Controllers
         {
             string[] files = Directory.GetFiles(path); 
             return files;
+        }
+
+        [HttpPost]
+        [Route("GetFileRoute")]
+        public IActionResult GetFileRoute([FromBody] Downloadfile file)
+        {
+            var path = RoutePublicFiles("");
+            var filepath = path + "\\" + file.Name;
+            return Ok(filepath);
+        }
+
+
+        //[HttpPost("name:string")]
+        [Route("DownloadPublic")]
+        public IActionResult Download(string name)
+        {
+            var path = RoutePublicFiles("");
+            var filepath = path + "\\" + name;
+            return File(System.IO.File.ReadAllBytes(filepath), "image/png", System.IO.Path.GetFileName(filepath));
         }
     }
 }
