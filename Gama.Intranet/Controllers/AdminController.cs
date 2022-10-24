@@ -1,4 +1,5 @@
 ﻿using Gama.Intranet.BL.DAO;
+using Gama.Intranet.BL.DTO.Response;
 using Gama.Intranet.BL.Models;
 using Gama.Intranet.Management;
 using Microsoft.AspNetCore.Authorization;
@@ -35,7 +36,20 @@ namespace Gama.Intranet.Controllers
         [Route("GetUsers")]
         public IActionResult GetUsers()
         {
-            return Ok(adminDAO.GetUsers());
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.GetAllUsers();
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }catch(Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
         }
 
         [HttpGet]

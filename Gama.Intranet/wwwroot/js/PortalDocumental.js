@@ -1,5 +1,5 @@
 ﻿
-//var CurrentRoute = [];
+var CurrentRoute = [];
 
 $(document).ready(function () {
 
@@ -105,7 +105,9 @@ function OpenFolder(name) {
     $("#files-area").html(null);
     // create a new route
     AddFolderToRoute(name);
-    //CurrentRoute.push(name);
+    CurrentRoute.push(name);
+
+    UpdateSiteMap();
 
     debugger;
     var obj =
@@ -155,4 +157,19 @@ function GetRootFiles() {
             alert("error");
         }
     });
+}
+
+function UpdateSiteMap() {
+    $('#folders-nav').html(null);
+    var html = '';
+
+    CurrentRoute.forEach((element) => {
+
+        html += '<li class="breadcrumb-item"><a href="#">' + element + '</a></li>'
+        /*html += '<li class="breadcrumb-item active" aria-current="page">Data</li>'*/
+
+    });
+
+    $('#folders-nav').append(html);
+
 }
