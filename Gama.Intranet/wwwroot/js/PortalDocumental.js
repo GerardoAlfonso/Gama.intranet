@@ -69,9 +69,15 @@ function PrintFilesAndFolders(folders, files) {
 
 //}
 
-function AddFolderToRoute(folder) {
-    sessionStorage.setItem("path", sessionStorage.getItem("path") + "\\" + folder);
+function AddFolderToRoute() {
+    var route = '';
+    route += sessionStorage.getItem("path");
+    CurrentRoute.forEach((element) => {
+        route += '\\' + element
+    });
+    sessionStorage.setItem("CurrentRoute", route);
 }
+
 
 function ReplaceDirectory(directory) {
     return directory.replace(/\\/g, " ");
@@ -99,38 +105,10 @@ function Downloadfile() {
 function OpenFolder(name) {
     $("#files-area").html(null);
     // create a new route
-    AddFolderToRoute(name);
     CurrentRoute.push(name);
-
+    AddFolderToRoute();
     UpdateSiteMap();
-
-    debugger;
-    var obj =
-    {
-        Route: sessionStorage.getItem("path"),
-        Token: "",
-        IdUser: 0
-    }
-
-    $.ajax({
-        type: "POST",
-        url: getHostName() + "/Files/GetPublicFilesToFolder",
-        dataType: "json",
-        contentType: "Application/json",
-        data: JSON.stringify(obj),
-        success: function (result) {
-
-            if (result.status == 1) {
-                PrintFilesAndFolders(result.folders, result.files)
-            }
-            else {
-                alert(result.message)
-            }
-        },
-        error: function (error) {
-            alert("error");
-        }
-    });
+    LoadFolder();
 }
 
 //
@@ -157,17 +135,55 @@ function GetRootFiles() {
 function UpdateSiteMap() {
     $('#folders-nav').html(null);
     var html = '';
-    html += '<li class="breadcrumb-item disabled"><a href="#" ><i class="fa fa-2.5px  fa-chevron-left"></i></a></li>'
+    html += '<li class="breadcrumb-item disabled" onclick="BackFolder()"><a href="#" ><i class="fa fa-2.5px  fa-chevron-left"></i></a></li>'
     CurrentRoute.forEach((element) => {
-        
-        html += '<li class="breadcrumb-item"><a href="#">' + element + '</a></li>'
-
-        /*html += '<li class="breadcrumb-item active" aria-current="page">Data</li>'*/
-
+        html += '<li class="breadcrumb-item active" aria-current="page">' + element + '</li>'
     });
-
     $('#folders-nav').append(html);
 }
+
+
+function BackFolder() {
+    CurrentRoute.pop();
+    $("#files-area").html(null);
+    // create a new route
+    AddFolderToRoute();
+    UpdateSiteMap();
+    LoadFolder();
+}
+
+
+function LoadFolder() {
+    var obj =
+    {
+        Route: sessionStorage.getItem("CurrentRoute"),
+        Token: "",
+        IdUser: 0
+    }
+    $.ajax({
+        type: "POST",
+        url: getHostName() + "/Files/GetPublicFilesToFolder",
+        dataType: "json",
+        contentType: "Application/json",
+        data: JSON.stringify(obj),
+        success: function (result) {
+
+            if (result.status == 1) {
+                PrintFilesAndFolders(result.folders, result.files)
+            }
+            else {
+                alert(result.message)
+            }
+        },
+        error: function (error) {
+            alert("error");
+        }
+    });
+
+
+}
+
+
 //$(function () {
 //    $('.disabled a').click(function (ev) {
 //        ev.preventDefault(); //Una de estas 2 líneas debería funcionar bien.
