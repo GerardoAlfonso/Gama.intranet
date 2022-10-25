@@ -25,9 +25,7 @@ $(document).ready(function () {
                 alert("error");
             }
         });
-    }
-
-   
+    }   
 });
 
 function PrintFilesAndFolders(folders, files) {
@@ -53,7 +51,7 @@ function PrintFilesAndFolders(folders, files) {
         html += '    <div class="card bg-light rounded p-4 mb-4">'
         html += '        <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center>'
         html += '        <div class=contenedor > <center><h7 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h7></center></div>'
-        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="Downloadfile()" class="btn btn-info">PDF</button></center></div>'
+        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="Downloadfile(' + "'" + ReplaceDirectory(element).split(" ").slice(-1)[0] + "'" + ')" class="btn btn-info">PDF</button></center></div>'
         html += '    </div>'
         html += '</div>'
 
@@ -61,13 +59,6 @@ function PrintFilesAndFolders(folders, files) {
     $("#files-area").append(html);
 
 }
-
-
-
-//function OpenFolder() {
-//    $("#files-area").append(null);
-
-//}
 
 function AddFolderToRoute() {
     var route = '';
@@ -78,7 +69,6 @@ function AddFolderToRoute() {
     sessionStorage.setItem("CurrentRoute", route);
 }
 
-
 function ReplaceDirectory(directory) {
     return directory.replace(/\\/g, " ");
 
@@ -86,14 +76,9 @@ function ReplaceDirectory(directory) {
 
 
 // esto no sale hoy xD
-function Downloadfile() {
+function Downloadfile(name) {
 
-    
-    debugger;
-    window.location = '/Files/DownloadPublic?name=' + "btncan.png" + '&amp';
-
-    
-
+    window.location = '/Files/DownloadPublic?name=' + name + '&amp';
 }
 
 //function UploadFile() {
