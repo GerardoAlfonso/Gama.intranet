@@ -153,7 +153,25 @@ namespace Gama.Intranet.Controllers
         {
             var path = RoutePublicFiles("");
             var filepath = path + "\\" + name;
-            return File(System.IO.File.ReadAllBytes(filepath), "image/png", System.IO.Path.GetFileName(filepath));
+            var cadena = name.Substring((name.Length - 4), 4);
+            
+            if (cadena == ".pdf") 
+            {
+                return File(System.IO.File.ReadAllBytes(filepath), "document/pdf", System.IO.Path.GetFileName(filepath));
+            }
+            else if(cadena == ".png")
+            {
+                return File(System.IO.File.ReadAllBytes(filepath), "image/png", System.IO.Path.GetFileName(filepath));
+            }
+            else if (cadena == "docx")
+            {
+                return File(System.IO.File.ReadAllBytes(filepath), "document/docx", System.IO.Path.GetFileName(filepath));
+            }
+            else
+            {
+                return File(System.IO.File.ReadAllBytes(filepath), "document/*", System.IO.Path.GetFileName(filepath));
+            }
+
         }
     }
 }
