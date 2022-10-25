@@ -36,13 +36,11 @@ function PrintFilesAndFolders(folders, files) {
     var html = '';
     var name = "";
     folders.forEach((element) => {
-        html += '<div class="col-lg-3 mb-2">'
-        html += '    <div class="service-item rounded p-4 mb-4">'
-        html += '        <center><i class="fa fa-3x fa-folder-open text-primary mb-4" id="hed-icono"></i></center>'
-        html += '        <center><h4 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h4></center>'
-        html += '        <center><p class="m-0">Vero amet vero eos kasd justo ipsum diam sed elitr</p></center>'
-        html += '        <br />'
-        html += '        <center><button type="button" class="btn btn-info" onclick="OpenFolder(' + "'" + ReplaceDirectory(element).split(" ").slice(-1)[0] + "'" + ')" data-toggle="button" aria-pressed="false" autocomplete="off">ABRIR</button></center>'
+        html += '<div class="col-lg-3 mb-2 contenedor">'
+        html += '    <div class="card bg-light rounded p-4 mb-4">'
+        html += '        <center><i class="fa fa-3x fa-folder-open text-primary mb-4"></i></center>'
+        html += '        <div class=contenedor > <center><h7 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h7></center></div>'
+        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="OpenFolder(' + "'" + ReplaceDirectory(element).split(" ").slice(-1)[0] + "'" + ')" class="btn btn-info">Abrir</button></center></div>'
         html += '    </div>'
         html += '</div>'
 
@@ -51,14 +49,11 @@ function PrintFilesAndFolders(folders, files) {
     html = '';
 
     files.forEach((element) => {
-        html += '<div class="col-lg-3 mb-2">'
-        html += '    <div class="service-item rounded p-4 mb-4">'
+        html += '<div class="col-lg-3 mb-2 contenedor">'
+        html += '    <div class="card bg-light rounded p-4 mb-4">'
         html += '        <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center>'
-        html += ''
-        html += '        <center><h4 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h4></center>'
-        html += '        <center><p class="m-0">Vero amet vero eos kasd justo ipsum diam sed elitr</p></center>'
-        html += '        <br />'
-        html += '        <center><button type="button" class="btn btn-info" onclick="Downloadfile()" data-toggle="button" aria-pressed="false" autocomplete="off">Descargar PDF</button></center>'
+        html += '        <div class=contenedor > <center><h7 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h7></center></div>'
+        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="Downloadfile()" class="btn btn-info">PDF</button></center></div>'
         html += '    </div>'
         html += '</div>'
 
@@ -162,14 +157,28 @@ function GetRootFiles() {
 function UpdateSiteMap() {
     $('#folders-nav').html(null);
     var html = '';
-
+    html += '<li class="breadcrumb-item disabled"><a href="#" ><i class="fa fa-2.5px  fa-chevron-left"></i></a></li>'
     CurrentRoute.forEach((element) => {
-
+        
         html += '<li class="breadcrumb-item"><a href="#">' + element + '</a></li>'
+
         /*html += '<li class="breadcrumb-item active" aria-current="page">Data</li>'*/
 
     });
 
     $('#folders-nav').append(html);
-
 }
+//$(function () {
+//    $('.disabled a').click(function (ev) {
+//        ev.preventDefault(); //Una de estas 2 líneas debería funcionar bien.
+//        return false;
+//    });
+//});
+
+
+////Funcion para remover la clase del icono de atras
+//function prueba() {
+//    $('.disabled').removeClass("disabled").addClass("active");
+//    alert("hola");
+//}
+

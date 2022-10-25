@@ -1,106 +1,27 @@
-﻿function alert()
-{
-    if ($('#name').val().length == 0) {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            icon: 'error',
-            title: 'Debe completar el campo nombre',
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    }
+﻿//Funcion para mandar a llamar el modal de eliminar 
 
-
-    if ($('#password').val().length == 0) {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            icon: 'error',
-            title: 'Debe completar el campo Contraseña',
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    }
-
-
-    if ($('#token').val().length == 0) {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            icon: 'error',
-            title: 'Debe completar el campo Token',
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    }
-    if ($('#LastAccess').val().length == 0) {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            icon: 'error',
-            title: 'Debe completar el campo LastAccess',
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    }
-        if ($('#LastAttempDate').val().length == 0) {
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                icon: 'error',
-                title: 'Debe completar el campo LastAttempDate',
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-    }
+function del() {
+    Swal.fire({
+        title: 'Esta seguro que desea eliminar este registro?',
+        text: "No podras revertir estos cambios!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, Borrarlo!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                'Eliminado!',
+                'Este registro ha sido Eliminado.',
+                'success'
+            )
+        }
+    })
 }
 
-function validarUser() {
-    var prueba=document.getElementById('exampleFormControlSelect1');
 
-    if (prueba.value == 0 || prueba.value == "") {
-        UserCreation.focus();
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            icon: 'error',
-            title: 'Debe completar el campo Creacion de usuario',
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-    }
-}
 
 
 var dataSet = [
@@ -188,6 +109,8 @@ $(document).ready(function () {
 
 
 
+
 $(document).ready(function () {
     $('#example').DataTable();
 });
+
