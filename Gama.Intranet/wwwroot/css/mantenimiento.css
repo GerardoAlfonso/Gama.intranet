@@ -13,7 +13,7 @@
 
 .table-title {
     padding-bottom: 15px;
-    background: #299be4;
+    background: #2b72c6;
     color: #fff;
     padding: 16px 30px;
     margin: -20px -25px 10px;
@@ -109,6 +109,7 @@ table.table td a {
 
 table.table td i {
     font-size: 19px;
+    margin-right: 10px;
 }
 
 table.table .avatar {
@@ -164,7 +165,7 @@ table.table .avatar {
         }
 
     .pagination li.active a, .pagination li.active a.page-link {
-        background: #03A9F4;
+        background: #3a73c9;
     }
 
         .pagination li.active a:hover {
@@ -196,5 +197,7 @@ table.table .avatar {
     background-color: orange !important;
     color: white !important;
 }
+
+
 
 

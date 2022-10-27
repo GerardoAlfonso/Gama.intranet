@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Mantenimiento Page";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -68,6 +68,7 @@
                         <th>LastAccess</th>
                         <th>UserCreation</th>
                         <th>Action</th>
+                        <th>Permisos</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -85,6 +86,9 @@
                             <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
                             <a href="#" class="delete" title="Delete" onclick="del()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
                         </td>
+                        <td>
+                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
+                        </td>
                     </tr>
                       <tr>
                         <td>1</td>
@@ -99,6 +103,9 @@
                         <td>
                             <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
                             <a href="#" class="delete" title="Delete" onclick="dele()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
+                        </td>
+                        <td>
+                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
                         </td>
                     </tr>
                       <tr>
@@ -115,6 +122,9 @@
                             <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
                             <a href="#" class="delete" title="Delete" onclick="dele()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
                         </td>
+                        <td>
+                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
+                        </td>
                     </tr>
                       <tr>
                         <td>1</td>
@@ -129,6 +139,9 @@
                         <td>
                             <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
                             <a href="#" class="delete" title="Delete" onclick="dele()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
+                        </td>
+                        <td>
+                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
                         </td>
                     </tr>
                     
@@ -209,6 +222,86 @@
                   <button class="btn btn-warning" type="button">Restablecer Contraseña</button>
                 </div>
               </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success" onclick="validar_campos()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <!-- MODAL PERMISOS -->
+    <div class="modal fade" id="exampleModalPermisos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h5 class="exampleModalLabel" id="exampleModalLabel">Administracion de <b>Archivos</b></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row p-2">
+                <div class="col">
+                  <label class="form-label">ARCHIVOS</label>
+                  <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1 status">
+                      <option value="0">Seleccione un archivo</option>
+                      <option value="1">ARCHIV01</option>
+                      <option value="2">ARCHIVO2</option>
+                      <option value="3">ARCHIVO3</option>
+                    </select>
+                  </div>
+                </div>
+
+                 <div class="col ">
+                  <label class="form-label">Tipo de Permisos</label>
+                  <div class="form-group">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <label class="form-check-label" for="inlineCheckbox2">Lectura</label>
+                    </div>
+
+                   <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                          <label class="form-check-label" for="inlineCheckbox2">Escritura</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                         <button type="button" class="btn btn-success">Agregar</button>
+                  </div>
+
+                </div>
+              </div>
+              </div>
+
+              <div class="row p-2">
+                <div class="col">
+                  <div class="table-responsive">
+                     <table class="table">
+                           <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre Archivo</th>	
+                                 <th>Permiso</th>	
+                        
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                              <tr>
+                                <td>1</td>
+                                <td><a href="#"> Prueba.pdf</a></td>
+                                <td>Lectura</td>                        
+                            </tr>
+                        </tbody>
+                   </table>
+                </div>
+                  </div>
+                </div>
+
+              
             </form>
           </div>
           <div class="modal-footer">

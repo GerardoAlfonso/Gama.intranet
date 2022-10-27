@@ -48,5 +48,9 @@ namespace Gama.Intranet.Controllers
         {
             return View();
         }
+        public IActionResult Bitacora()
+        {
+            return View();
+        }
     }
 }
