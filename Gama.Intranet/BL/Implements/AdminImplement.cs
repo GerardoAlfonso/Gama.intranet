@@ -29,7 +29,7 @@ namespace Gama.Intranet.BL.Implements
 
         public Usuario getById(long id)
         {
-            throw new System.NotImplementedException();
+            return context.Usuario.FirstOrDefault(x => x.Id == id);
         }
 
         public int insert(Usuario entity)
@@ -60,7 +60,13 @@ namespace Gama.Intranet.BL.Implements
 
         public int update(Usuario DBEntity, Usuario entity)
         {
-            throw new System.NotImplementedException();
+            DBEntity.Password = DBEntity.Password == entity.Password ? DBEntity.Password : Crypto.GetSHA256(entity.Password);
+            DBEntity.UpdatedAt = DateTime.Now;
+            DBEntity.Name = entity.Name;
+            DBEntity.Role = entity.Role;
+            DBEntity.Status = entity.Status;
+            context.SaveChanges();
+            return entity.Id;
         }
     }
 }

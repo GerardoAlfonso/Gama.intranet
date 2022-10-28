@@ -52,8 +52,11 @@
                         <h2>User <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
-                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><b>Agregar Nuevo</b></button>                    </div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="ClearModal()">
+                            <b>Agregar Nuevo</b>
+                        </button>                    
                     </div>
+                </div>
             </div>
             <table id="example" class="table table-border table-hover">
                 <thead>
@@ -61,90 +64,18 @@
                         <th>#</th>
                         <th>Nombre</th>						
                         <th>Status</th>
-                        <th>LoginAttemps</th>
+                        <th>Login Attmps</th>
                         <th>Role</th>
                         <th>Token</th>
-                        <th>ChangePassword</th>
-                        <th>LastAccess</th>
-                        <th>UserCreation</th>
+                        <th>Change Pass</th>
+                        <th>Last Access</th>
+                        <th>User Creat</th>
                         <th>Action</th>
                         <th>Permisos</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
-                    <tr>
-                        <td>1</td>
-                        <td><a href="#"> Michael Holz</a></td>
-                        <td>prueba</td>                        
-                        <td>Admin</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>
-                            <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
-                            <a href="#" class="delete" title="Delete" onclick="del()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
-                        </td>
-                        <td>
-                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
-                        </td>
-                    </tr>
-                      <tr>
-                        <td>1</td>
-                        <td><a href="#"> Michael Holz</a></td>
-                        <td>prueba</td>                        
-                        <td>Admin</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>
-                            <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
-                            <a href="#" class="delete" title="Delete" onclick="dele()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
-                        </td>
-                        <td>
-                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
-                        </td>
-                    </tr>
-                      <tr>
-                        <td>1</td>
-                        <td><a href="#"> Michael Holz</a></td>
-                        <td>prueba</td>                        
-                        <td>Admin</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>Active</td>
-                        <td>
-                            <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
-                            <a href="#" class="delete" title="Delete" onclick="dele()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
-                        </td>
-                        <td>
-                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
-                        </td>
-                    </tr>
-                      <tr>
-                        <td>1</td>
-                        <td><a href="#"> Michael Holz</a></td>
-                        <td>prueba</td>                        
-                        <td>Admin</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>prueba</td>
-                        <td>
-                            <a href="#" class="edit" title="Editar" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-1x fa-pen" title="Editar"></i></a>
-                            <a href="#" class="delete" title="Delete" onclick="dele()"><i class="fa fa-1x fa-trash" title="Eliminar"></i></a>
-                        </td>
-                        <td>
-                           <center> <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" ><i class="fa fa-1x fa-exclamation" title="Permisos"></i></a></center>
-                        </td>
-                    </tr>
-                    
+                                        
                 </tbody>
             </table>
            
@@ -163,7 +94,7 @@
     <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/root.js" asp-append-version="true"></script>
-    <script src="~/js/Mantenimiento.js" ></script>
+    @*<script src="~/js/Mantenimiento.js" ></script>*@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="~/js/Usuarios.js"></script>
 
@@ -191,16 +122,16 @@
               <div class="row p-2">
                 <div class="col">
                   <label class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="password" placeholder="Ingrese la contraseña" required
+                  <input type="text" class="form-control" id="password" placeholder="Ingrese la contraseña" required
                     aria-label="name" />
                 </div>
 
                 <div class="col">
                   <label class="form-label">Status</label>
                   <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1 status">
-                      <option>Activo</option>
-                      <option>Desahabilitado</option>
+                    <select class="form-control" id="SelectStatus">
+                      <option value="1">Activo</option>
+                      <option value="2">Desahabilitado</option>
                     </select>
                   </div>
                 </div>
@@ -209,24 +140,24 @@
                 <div class="col">
                   <label class="form-label">Role</label>
                   <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1 role" required>
-                      <option>Administrador</option>
-                      <option>Usuario</option>
-                      <option>Cliente</option>
-                      <option>Vendedor</option>
-                      <option>Cajero</option>
+                    <select class="form-control" id="SelectRole" required>
+                      <option value="1">Administrador</option>
+                      <option value="2">Usuario</option>
+                      <option value="3">Cliente</option>
+                      <option value="4">Vendedor</option>
+                      <option value="5">Cajero</option>
                     </select>
                   </div>
                 </div>
                 <div class="d-grid gap-2 d-md-block">
-                  <button class="btn btn-warning" type="button">Restablecer Contraseña</button>
+                  <button class="btn btn-warning" type="button" onclick="GenerateRandomPassword()">Restablecer Contraseña</button>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" onclick="validar_campos()">Guardar</button>
+            <button type="submit" class="btn btn-success" onclick="UpdateUser()">Guardar</button>
           </div>
         </div>
       </div>
@@ -247,7 +178,7 @@
                 <div class="col">
                   <label class="form-label">ARCHIVOS</label>
                   <div class="form-group">
-                    <select class="form-control" id="exampleFormControlSelect1 status">
+                    <select class="form-control" id="SelectFileStatus">
                       <option value="0">Seleccione un archivo</option>
                       <option value="1">ARCHIV01</option>
                       <option value="2">ARCHIVO2</option>
@@ -306,7 +237,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" onclick="validar_campos()">Guardar</button>
+            <button type="submit" class="btn btn-success" onclick="UpdateUser()">Guardar</button>
           </div>
         </div>
       </div>

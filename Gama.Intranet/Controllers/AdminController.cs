@@ -12,7 +12,7 @@ namespace Gama.Intranet.Controllers
     [ApiController]
     [EnableCors("AllowOrigin")]
     [Route("[controller]")]
-    [Authorize(Roles = "1,0")]
+    //[Authorize(Roles = "1,0")]
     public class AdminController : ControllerBase
     {
         private readonly AdminDAO adminDAO;
@@ -31,7 +31,29 @@ namespace Gama.Intranet.Controllers
         {
             throw new NotImplementedException();
         }
-        
+
+        [HttpGet]
+        [Route("GetUser")]
+        public IActionResult GetUser(int id)
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.getById(id);
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
+
         [HttpGet]
         [Route("GetUsers")]
         public IActionResult GetUsers()
@@ -61,9 +83,32 @@ namespace Gama.Intranet.Controllers
 
         [HttpPost]
         [Route("UpdateUser")]
-        public IActionResult UpdateUser()
+        
+        public IActionResult UpdateUser([FromBody] Usuario user)
         {
-            throw new NotImplementedException();
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                Usuario result = adminDAO.getById(user.Id);
+                if(result == null)
+                {
+                    dto.Status = 0;
+                    dto.Message = "Error: no se encontro el usuario que intenta actualizar";
+                    dto.Data = null;
+                    return Ok(dto);
+                }
+                
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = adminDAO.update(result, user);
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
         }
 
         #endregion
@@ -86,15 +131,50 @@ namespace Gama.Intranet.Controllers
 
         #endregion
 
-        [HttpPost]
+        [HttpGet]
         [Route("ResetPassword")]
-        public IActionResult ResetPassword([FromBody] Usuario user)
+        public IActionResult ResetPassword(int id)
         {
-            return Ok(adminDAO.ResetPasswordUser(user.Id));
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.ResetPasswordUser(id);
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
         }
 
 
-        
+
+        [HttpGet]
+        [Route("GenerateRandomPassword")]
+        public IActionResult GenerateRandomPassword()
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = Crypto.RandomString(8);
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
 
 
     }

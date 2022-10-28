@@ -1,26 +1,5 @@
 ﻿//Funcion para mandar a llamar el modal de eliminar 
 
-function del() {
-    Swal.fire({
-        title: 'Esta seguro que desea eliminar este registro?',
-        text: "No podras revertir estos cambios!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, Borrarlo!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-                'Eliminado!',
-                'Este registro ha sido Eliminado.',
-                'success'
-            )
-        }
-    })
-}
-
 
 
 
@@ -111,6 +90,6 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $('#example').DataTable();
+    //$('#example').DataTable();
 });
 
