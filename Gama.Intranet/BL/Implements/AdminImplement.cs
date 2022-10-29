@@ -19,7 +19,9 @@ namespace Gama.Intranet.BL.Implements
 
         public int deleteById(Usuario entity)
         {
-            throw new System.NotImplementedException();
+            context.Usuario.Remove(entity);
+            context.SaveChanges();
+            return 1;
         }
 
         public List<Usuario> getAll()
@@ -58,6 +60,11 @@ namespace Gama.Intranet.BL.Implements
             return context.Usuario.ToList();
         }
 
+        public List<Usuario> GetAllUsersActive()
+        {
+            return context.Usuario.Where(x => x.Status == 1).ToList();
+        }
+
         public int update(Usuario DBEntity, Usuario entity)
         {
             DBEntity.Password = DBEntity.Password == entity.Password ? DBEntity.Password : Crypto.GetSHA256(entity.Password);
@@ -68,5 +75,22 @@ namespace Gama.Intranet.BL.Implements
             context.SaveChanges();
             return entity.Id;
         }
+
+
+
+        // ROLES
+        public List<Roles> GetRoles()
+        {
+            return context.Roles.ToList();
+        }
+
+        // STATUS
+        public List<LogStatus> GetStatus()
+        {
+            return context.LogStatus.ToList();
+        }
+
+
+
     }
 }

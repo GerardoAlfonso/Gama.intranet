@@ -8,6 +8,9 @@ namespace Gama.Intranet.BL.DAO
         string ResetPasswordUser(int Id);
         List<Usuario> GetUsers();
         List<Usuario> GetAllUsers();
+        List<Usuario> GetAllUsersActive();
+        List<Roles> GetRoles();
+        List<LogStatus> GetStatus();
 
     }
 }

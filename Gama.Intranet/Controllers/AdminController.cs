@@ -61,7 +61,7 @@ namespace Gama.Intranet.Controllers
             GenericDTO dto = new GenericDTO();
             try
             {
-                var data = adminDAO.GetAllUsers();
+                var data = adminDAO.GetAllUsersActive();
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = data;
@@ -78,7 +78,21 @@ namespace Gama.Intranet.Controllers
         [Route("GetAllUsers")]
         public IActionResult GetAllUsers()
         {
-            return Ok(adminDAO.getAll());
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.getAll();
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
         }
 
         [HttpPost]
@@ -101,6 +115,36 @@ namespace Gama.Intranet.Controllers
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = adminDAO.update(result, user);
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
+        [HttpPost]
+        [Route("DeleteUser")]
+
+        public IActionResult DeleteUser([FromBody] Usuario user)
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                Usuario entity = adminDAO.getById(user.Id);
+                if (entity == null)
+                {
+                    dto.Status = 0;
+                    dto.Message = "Error: no se encontro el usuario que intenta desactivar";
+                    dto.Data = null;
+                    return Ok(dto);
+                }
+                
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = adminDAO.deleteById(entity);
             }
             catch (Exception ex)
             {
@@ -175,6 +219,48 @@ namespace Gama.Intranet.Controllers
             return Ok(dto);
         }
 
+        [HttpGet]
+        [Route("GetRoles")]
+        public IActionResult GetRoles()
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.GetRoles();
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
+
+        [HttpGet]
+        [Route("GetStatus")]
+        public IActionResult GetStatus()
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.GetStatus();
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
 
 
     }

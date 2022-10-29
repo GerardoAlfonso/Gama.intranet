@@ -54,11 +54,15 @@
                     <div class="col-sm-7">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="ClearModal()">
                             <b>Agregar Nuevo</b>
-                        </button>                    
+                        </button>
                     </div>
                 </div>
             </div>
             <table id="example" class="table table-border table-hover">
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="inactivos" onclick="RefreshTable()">
+                    <label class="form-check-label" for="inactivos">Mostrar usuarios inactivos</label>
+                </div>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -138,7 +142,7 @@
               </div>
                  <div class="row p-2">
                 <div class="col">
-                  <label class="form-label">Role</label>
+                  <label class="form-label">Rol</label>
                   <div class="form-group">
                     <select class="form-control" id="SelectRole" required>
                       <option value="1">Administrador</option>
