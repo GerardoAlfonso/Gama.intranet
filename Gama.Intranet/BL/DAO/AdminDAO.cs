@@ -11,6 +11,7 @@ namespace Gama.Intranet.BL.DAO
         List<Usuario> GetAllUsersActive();
         List<Roles> GetRoles();
         List<LogStatus> GetStatus();
+        List<UsuariosPermisosFolders> GetPermissionsFolders(int IdUser);
 
     }
 }

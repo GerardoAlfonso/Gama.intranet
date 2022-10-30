@@ -84,6 +84,15 @@ function del(_id) {
     })
 }
 
+function ButtonGuardar() {
+    if ($('#iduser').val() == '') {
+        CreateUser();
+    }
+    else {
+        UpdateUser();
+    }
+}
+
 function LoadUsers() {
     var users = $("#inactivos").is(":checked") ? "GetAllUsers" : "GetUsers";
     debugger;
@@ -117,7 +126,7 @@ function LoadUsers() {
                             '</a > ',
                             // permisos
                             '<center> ' +
-                            '   <a href="#" class="delete" title="Permisos" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" >' +
+                            '   <a href="#" class="delete" title="Permisos" onclick="GetPermissions('+ element.id +')" data-bs-toggle="modal" data-bs-target="#exampleModalPermisos" >' +
                             '       <i class="fa fa-1x fa-exclamation" title="Permisos"></i>' +
                             '   </a >' +
                             '</center > '
@@ -195,6 +204,49 @@ function GenerateRandomPassword() {
         }
     });
 }
+
+
+function CreateUser() {
+    var obj =
+    {
+        "name": $('#name').val(),
+        "password": $('#password').val(),
+        "status": parseInt($('#SelectStatus option:selected').val()),
+        "role": parseInt($('#SelectRole option:selected').val())
+    }
+    debugger;
+    $.ajax({
+        type: "POST",
+        url: getHostName() + "/Admin/AddUser",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + window.localStorage.getItem("token"));
+        },
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(obj),
+        success: function (result) {
+            debugger;
+            if (result.status == 1) {
+                $('#exampleModal').modal('hide');
+                Swal.fire(
+                    '!Hecho!',
+                    'Registro creado con exito',
+                    'success'
+                )
+                RefreshTable()
+
+            }
+            else {
+                alert(result.message)
+            }
+        },
+        error: function (err) {
+            alert("error");
+        }
+    });
+}
+
+
 
 
 function UpdateUser() {
@@ -277,7 +329,6 @@ function LoadControls() {
                 result.data.forEach((element) => {
                     html += '<option value = "' + element.id + '" >' + element.description + '</option >'
                 })
-                debugger;
                 $('#SelectRole').append(html)
             }
             else {
@@ -308,7 +359,6 @@ function LoadControls() {
                 result.data.forEach((element) => {
                     html += '<option value = "' + element.id + '" >' + element.name + '</option >'
                 })
-                debugger;
                 $('#SelectStatus').append(html)
             }
             else {
@@ -320,4 +370,96 @@ function LoadControls() {
         }
     });
 
+    // cargar listado de carpetas
+    $.ajax({
+        type: "GET",
+        url: getHostName() + "/Files/GetPrivateFiles",
+        dataType: "json",
+        contentType: "Application/json",
+        headers: {
+            Authorization: 'Bearer ' + window.localStorage.getItem("token")
+        },
+        success: function (result) {
+            if (result.status == 1) {
+                debugger;
+                var html = ''
+                $('#SelectFolders').html(html)
+
+                result.folders.forEach((element) => {
+                    html += '<option value="1">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '</option>'
+                })
+
+                
+                
+                $('#SelectFolders').append(html)
+            }
+            else {
+                alert(result.message)
+            }
+        },
+        error: function (err) {
+            alert("error");
+        }
+    });
+
 }
+
+
+
+
+function GetPermissions(_id) {
+    var obj =
+    {
+        "Id": parseInt(_id)
+    }
+
+    // cargar roles
+    $.ajax({
+        type: "POST",
+        url: getHostName() + "/Admin/GetPermissions",
+        dataType: "json",
+        contentType: "Application/json",
+        headers: {
+            Authorization: 'Bearer ' + window.localStorage.getItem("token")
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            if (result.status == 1) {
+
+                debugger;
+                var html = ''
+                $('#tbody-archivos').html(html)
+
+                result.data.forEach((element) => {
+                    html += '<tr>'
+                    html += '    <td>' + element.id + '</td>'
+                    html += '    <td><a href="#">' + element.idFolder + '</a></td>'
+                    html += '    <td>' + element.read + '</td>'
+                    html += '    <td>' + element.write + '</td>'
+                    html += '    <td>'
+                    html += '       <a href = "#" class="delete" title = "Delete" onclick="del(' + '' + ')" > '
+                    html += '           <i class="fa fa-1x fa-trash" title="Eliminar"></i>'
+                    html += '       </a>'
+                    html += '    </td>'
+                    html += '</tr>'
+                })
+                
+                $('#tbody-archivos').append(html)
+            }
+            else {
+                alert(result.message)
+            }
+        },
+        error: function (err) {
+            alert("error");
+        }
+    });
+
+}
+
+
+function ReplaceDirectory(directory) {
+    return directory.replace(/\\/g, " ");
+
+}
+

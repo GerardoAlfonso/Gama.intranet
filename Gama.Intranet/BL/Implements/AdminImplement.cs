@@ -36,7 +36,14 @@ namespace Gama.Intranet.BL.Implements
 
         public int insert(Usuario entity)
         {
-            throw new System.NotImplementedException();
+            entity.CreatedAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
+            entity.ShouldChangePassword = false;
+            entity.Status = 1;
+            entity.Password = Crypto.GetSHA256(entity.Password);
+            context.Usuario.Add(entity);
+            context.SaveChanges();
+            return entity.Id;
         }
 
         public string ResetPasswordUser(int Id)
@@ -91,6 +98,11 @@ namespace Gama.Intranet.BL.Implements
         }
 
 
+        // Permissions
+        public List<UsuariosPermisosFolders> GetPermissionsFolders(int IdUser)
+        {
+            return context.UsuariosPermisosFolders.Where(x => x.IdUsuario == IdUser).ToList();
+        }
 
     }
 }
