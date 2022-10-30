@@ -12,7 +12,7 @@ namespace Gama.Intranet.Controllers
     [ApiController]
     [EnableCors("AllowOrigin")]
     [Route("[controller]")]
-    //[Authorize(Roles = "1,0")]
+    [Authorize(Roles = "1,0")]
     public class AdminController : ControllerBase
     {
         private readonly AdminDAO adminDAO;
@@ -27,9 +27,23 @@ namespace Gama.Intranet.Controllers
         [HttpPost]
         [Route("AddUser")]
         //[ValidateAntiForgeryToken]
-        public IActionResult AddUser()
+        public IActionResult AddUser([FromBody] Usuario user)
         {
-            throw new NotImplementedException();
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.insert(user);
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
         }
 
         [HttpGet]
@@ -249,6 +263,27 @@ namespace Gama.Intranet.Controllers
             try
             {
                 var data = adminDAO.GetStatus();
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = data;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
+        [HttpPost]
+        [Route("GetPermissions")]
+        public IActionResult GetPermissions([FromBody] Usuario user)
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                var data = adminDAO.GetPermissionsFolders(user.Id);
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = data;

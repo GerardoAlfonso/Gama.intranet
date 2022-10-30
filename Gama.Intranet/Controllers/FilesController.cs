@@ -1,6 +1,7 @@
 ﻿using Gama.Intranet.BL.DAO;
 using Gama.Intranet.BL.DTO.Request;
 using Gama.Intranet.BL.DTO.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,37 @@ namespace Gama.Intranet.Controllers
             return Ok(dto);
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "1,0")]
+        [Route("GetPrivateFiles")]
+        public IActionResult GetPrivateFiles()
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                string path = RoutePrivateFiles(null);
+                //string route = @"C:\Users\";
+                // get host route
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+                fileResponseDTO.Folders = GetFolders(path);
+                fileResponseDTO.Files = GetFiles(path);
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
         [HttpGet]
         [Route("GetPublicFiles")]
         public IActionResult GetPublicFiles() 
@@ -76,6 +108,10 @@ namespace Gama.Intranet.Controllers
 
             return Ok(fileResponseDTO);
         }
+
+
+
+
 
         [HttpPost]
         [Route("GetPublicFilesToFolder")]

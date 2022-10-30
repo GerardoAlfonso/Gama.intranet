@@ -161,7 +161,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" onclick="UpdateUser()">Guardar</button>
+            <button type="submit" class="btn btn-success" onclick="ButtonGuardar()">Guardar</button>
           </div>
         </div>
       </div>
@@ -182,11 +182,8 @@
                 <div class="col">
                   <label class="form-label">ARCHIVOS</label>
                   <div class="form-group">
-                    <select class="form-control" id="SelectFileStatus">
-                      <option value="0">Seleccione un archivo</option>
-                      <option value="1">ARCHIV01</option>
-                      <option value="2">ARCHIVO2</option>
-                      <option value="3">ARCHIVO3</option>
+                    <select class="form-control" id="SelectFolders">
+                      
                     </select>
                   </div>
                 </div>
@@ -220,15 +217,17 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nombre Archivo</th>	
-                                 <th>Permiso</th>	
-                        
+                                <th>Lectura</th>
+                                <th>Escritura</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody">
+                        <tbody id="tbody-archivos">
                               <tr>
                                 <td>1</td>
                                 <td><a href="#"> Prueba.pdf</a></td>
-                                <td>Lectura</td>                        
+                                <td>Lectura</td>
+                                <td>Lectura</td>
                             </tr>
                         </tbody>
                    </table>

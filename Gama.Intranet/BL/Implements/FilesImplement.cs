@@ -16,7 +16,8 @@ namespace Gama.Intranet.BL.Implements
 
         public ParametrosGenerales GetPrivatePath(string type)
         {
-            return (ParametrosGenerales)context.ParametrosGenerales.Where(x => x.Name == type);
+            ParametrosGenerales param = context.ParametrosGenerales.FirstOrDefault(x => x.Name == type);
+            return param;
         }
 
         public ParametrosGenerales GetPublicPath(string type)
