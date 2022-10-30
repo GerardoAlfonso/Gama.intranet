@@ -52,5 +52,13 @@ namespace Gama.Intranet.Controllers
         {
             return View();
         }
+        public IActionResult Proyectos()
+        {
+            return View();
+        }
+        public IActionResult MantenimientoGeneral()
+        {
+            return View();
+        }
     }
 }
