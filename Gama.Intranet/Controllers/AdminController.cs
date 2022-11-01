@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace Gama.Intranet.Controllers
 {
@@ -297,6 +298,28 @@ namespace Gama.Intranet.Controllers
             return Ok(dto);
         }
 
+
+
+        [HttpPost]
+        [Route("SavePermissions")]
+        public IActionResult SavePermissions([FromBody] List<UpdatePermissionsDAO> obj)
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                adminDAO.UpdatePermissionsUser(obj);
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = null;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok();
+        }
 
     }
 }

@@ -13,5 +13,6 @@ namespace Gama.Intranet.BL.DAO
         List<LogStatus> GetStatus();
         List<UsuariosPermisosFolders> GetPermissionsFolders(int IdUser);
 
+        void UpdatePermissionsUser(List<UpdatePermissionsDAO> obj);
     }
 }
