@@ -65,7 +65,7 @@ $(document).ready(function () {
 
                     setTimeout(() => {
                         $('#modal').iziModal('close');
-                        window.location = "https://localhost:44304/";
+                        window.location = getHostName();
                     }, "3000")
                     
                     

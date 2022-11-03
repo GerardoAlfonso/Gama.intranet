@@ -35,7 +35,11 @@ namespace Gama.Intranet.Controllers
             try
             {
                 List<string> path = new List<string>();
+                // production
                 path.Add(filesDAO.GetPublicPath("PublicPath").Value);
+                
+                // develop
+                //path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = path;
@@ -58,9 +62,13 @@ namespace Gama.Intranet.Controllers
             FileResponseDTO fileResponseDTO = new FileResponseDTO();
             try
             {
+                // production
                 string path = RoutePrivateFiles(null);
+
                 //string route = @"C:\Users\";
                 // get host route
+                
+                // develop
                 //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                 fileResponseDTO.Status = 1;
@@ -87,10 +95,13 @@ namespace Gama.Intranet.Controllers
             FileResponseDTO fileResponseDTO = new FileResponseDTO();
             try
             {
-                //string route = RoutePublicFiles(null);
-                string route = @"C:\Users\";
+                // production
+                string path = RoutePublicFiles(null);
+                //string route = @"C:\Users\";
+                
                 // get host route
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                // develoop
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                 fileResponseDTO.Status = 1;
                 fileResponseDTO.Message = "Success";
@@ -187,7 +198,11 @@ namespace Gama.Intranet.Controllers
         [Route("DownloadPublic")]
         public IActionResult Download(string name)
         {
+            // production
             var path = RoutePublicFiles("");
+
+            // develop
+            //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var filepath = path + "\\" + name;
             var cadena = name.Substring((name.Length - 4), 4);
             

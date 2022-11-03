@@ -1,4 +1,26 @@
 ﻿
+function Checkout() {
+
+
+    $.ajax({
+        type: "POST",
+        url: getHostName() + "/Admin/Checkout",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + window.localStorage.getItem("token"));
+        },
+        contentType: "application/json",
+        dataType: "json",
+        success: function (_result) {
+            
+        },
+        error: function (data) {
+            window.location = getHostName() + '/usuario/ingresar';
+        }
+    });
+}
+Checkout();
+
+
 // global objects
 
 var dataSet = [];
@@ -8,7 +30,6 @@ var IdCurrentUser = 0;
 
 // startup
 $(document).ready(function () {
-
     LoadUsers();
     LoadControls();
 
@@ -106,11 +127,11 @@ function LoadUsers() {
                 $('#example').DataTable({ data: dataSet });
             }
             else {
-                alert(result.message)
+                //alert(result.message)
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 }
@@ -141,7 +162,7 @@ function LoadUser(_id) {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 }
@@ -168,7 +189,7 @@ function GenerateRandomPassword() {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 }
@@ -209,7 +230,7 @@ function CreateUser() {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 }
@@ -253,7 +274,7 @@ function UpdateUser() {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 }
@@ -287,7 +308,7 @@ function LoadControls() {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 
@@ -317,7 +338,7 @@ function LoadControls() {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 
@@ -349,7 +370,7 @@ function LoadControls() {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 
@@ -403,7 +424,7 @@ function GetPermissions(_id) {
             }
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 
@@ -468,10 +489,17 @@ function UpdatePermissions() {
         dataType: "json",
         data: JSON.stringify(obj),
         success: function (result) {
-          
+            console.log(result);
+            
+            Swal.fire(
+                'Actualizado!',
+                'Registro actualizado con exito',
+                'success'
+            )
+            $('#exampleModalPermisos').modal('hide');
         },
         error: function (err) {
-            alert("error");
+            //alert("error");
         }
     });
 

@@ -318,8 +318,29 @@ namespace Gama.Intranet.Controllers
                 dto.Message = "Error: " + ex.Message;
                 dto.Data = null;
             }
-            return Ok();
+            return Ok(dto);
         }
+
+        [HttpPost]
+        [Route("Checkout")]
+        public IActionResult Checkout()
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = null;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex.Message;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
 
     }
 }
