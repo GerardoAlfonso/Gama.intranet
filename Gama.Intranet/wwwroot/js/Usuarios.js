@@ -1,42 +1,22 @@
-﻿$(document).ready(function () {
+﻿
+// global objects
+
+var dataSet = [];
+var PermisosUsuario = [];
+var IdCurrentUser = 0;
+
+
+// startup
+$(document).ready(function () {
 
     LoadUsers();
     LoadControls();
 
-
-    function DeleteUser() {
-
-    }
-
-    function AddUser() {
-
-    }
-
-    //function PrintTable(list) {
-
-    //    var html = '';
-    //    $('#tbody').html(null);
-
-    //    list.forEach((element) => {
-
-    //        html += '<tr>'
-    //        html += '    <td>1</td>'
-    //        html += '    <td><a href="#">' + element.name + '</a></td>'
-    //        html += '    <td>04/10/2013</td>'
-    //        html += '    <td>Admin</td>'
-    //        html += '    <td><span class="status text-success">&bull;</span> Active</td>'
-    //        html += '    <td>'
-    //        html += '        <a href="#" class="edit" title="Editar"><i class="fa fa-1x fa-pen" title="Editar" ></i></a>'
-    //        html += '        <a href="#" class="delete" title="Delete"><i class="fa fa-1x fa-trash" title="Eliminar" ></i></a>'
-    //        html += '    </td>'
-    //        html += '</tr>'
-
-    //    });
-    //    $('#tbody').append(html);
-    //}
 });
 
-var dataSet = [];
+
+// ============================================= //
+
 function del(_id) {
     Swal.fire({
         title: '¿Esta seguro que desea eliminar este usuario?',
@@ -84,15 +64,6 @@ function del(_id) {
     })
 }
 
-function ButtonGuardar() {
-    if ($('#iduser').val() == '') {
-        CreateUser();
-    }
-    else {
-        UpdateUser();
-    }
-}
-
 function LoadUsers() {
     var users = $("#inactivos").is(":checked") ? "GetAllUsers" : "GetUsers";
     debugger;
@@ -132,10 +103,7 @@ function LoadUsers() {
                             '</center > '
                         ])
                 });
-                console.log(dataSet);
-                $('#example').DataTable({
-                    data: dataSet
-                });
+                $('#example').DataTable({ data: dataSet });
             }
             else {
                 alert(result.message)
@@ -290,23 +258,6 @@ function UpdateUser() {
     });
 }
 
-function RefreshTable() {
-    dataSet = [];
-    $('#example').DataTable().destroy();
-    LoadUsers();
-}
-
-
-
-function ClearModal() {
-    $('#iduser').val(''),
-    $('#name').val(''),
-    $('#password').val('')
-    $("#SelectStatus").val('0')
-    $("#SelectRole").val('0')
-
-}
-
 
 function LoadControls() {
 
@@ -386,7 +337,7 @@ function LoadControls() {
                 $('#SelectFolders').html(html)
 
                 result.folders.forEach((element) => {
-                    html += '<option value="1">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '</option>'
+                    html += '<option value="">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '</option>'
                 })
 
                 
@@ -437,7 +388,7 @@ function GetPermissions(_id) {
                     html += '    <td>' + element.read + '</td>'
                     html += '    <td>' + element.write + '</td>'
                     html += '    <td>'
-                    html += '       <a href = "#" class="delete" title = "Delete" onclick="del(' + '' + ')" > '
+                    html += '       <a href = "#" class="delete" title = "Delete" onclick="delPermission(this)" > '
                     html += '           <i class="fa fa-1x fa-trash" title="Eliminar"></i>'
                     html += '       </a>'
                     html += '    </td>'
@@ -445,6 +396,7 @@ function GetPermissions(_id) {
                 })
                 
                 $('#tbody-archivos').append(html)
+                IdCurrentUser = obj.Id
             }
             else {
                 alert(result.message)
@@ -458,8 +410,154 @@ function GetPermissions(_id) {
 }
 
 
-function ReplaceDirectory(directory) {
-    return directory.replace(/\\/g, " ");
+function AgregarPermiso() {
+    
+    var obj = {
+        "id": parseInt($('#SelectFolders option:selected').val()),
+        "Folder": parseInt($('#SelectFolders option:selected').val()),
+        "Read": $("#chkLectura").is(":checked"),
+        "Write": $("#chkEscritura").is(":checked")
+    }
+    PermisosUsuario.push(obj);
+
+    var html = ''
+    html += '<tr>'
+    html += '    <td></td>'
+    html += '    <td><a href="#">' + $('#SelectFolders option:selected').text(), + '</a></td>'
+    html += '    <td>' + obj.Read + '</td>'
+    html += '    <td>' + obj.Write + '</td>'
+    html += '    <td>'
+    html += '       <a href = "#" class="delete" title = "Delete" onclick="del(' + '' + ')" > '
+    html += '           <i class="fa fa-1x fa-trash" title="Eliminar"></i>'
+    html += '       </a>'
+    html += '    </td>'
+    html += '</tr>'
+    $('#tbody-archivos').append(html);
+
+    debugger;
+}
+
+function UpdatePermissions() {
+
+    var json = TableToJson($('#TablePermissions'));
+    // delete button X
+    //json.forEach(function (v) { delete v.no });
+    json.forEach(function (v) { delete v.accion });
+    json.forEach(function (v) {
+        v.nombrearchivo = v.nombrearchivo.replace('<a href="#">', '').replace('</a>', '')
+    });
+
+    var obj = []
+    json.forEach((element) => {
+        obj.push({
+            'IdUSer': IdCurrentUser,
+            'escritura': element.escritura === 'true',
+            'lectura': element.lectura === 'true',
+            'nombrearchivo': element.nombrearchivo
+        })
+    });
+
+
+    $.ajax({
+        type: "POST",
+        url: getHostName() + "/Admin/SavePermissions",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + window.localStorage.getItem("token"));
+        },
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(obj),
+        success: function (result) {
+          
+        },
+        error: function (err) {
+            alert("error");
+        }
+    });
+
+    
+
+
+    debugger;
+}
+
+
+// ============================================= //
+
+function ButtonGuardar() {
+    if ($('#iduser').val() == '') {
+        CreateUser();
+    }
+    else {
+        UpdateUser();
+    }
+}
+
+function RefreshTable() {
+    dataSet = [];
+    $('#example').DataTable().destroy();
+    LoadUsers();
+}
+
+function ClearModal() {
+    $('#iduser').val(''),
+    $('#name').val(''),
+    $('#password').val('')
+    $("#SelectStatus").val('0')
+    $("#SelectRole").val('0')
 
 }
 
+// ============================================= //
+
+function ReplaceDirectory(directory) {
+    return directory.replace(/\\/g, " ");
+}
+
+function delPermission(element) {
+    element.parentNode.parentNode.remove();
+}
+
+
+// function to convert html table into json data
+function TableToJson(table) {
+    var data = [];
+    var headers = [];
+    for (var i = 0; i < table[0].rows[0].cells.length; i++) {
+        headers[i] = table[0].rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+    }
+    for (var i = 1; i < table[0].rows.length; i++) {
+        var tableRow = table[0].rows[i];
+        var rowData = {};
+        for (var j = 0; j < tableRow.cells.length; j++) {
+            rowData[headers[j]] = tableRow.cells[j].innerHTML;
+        }
+        data.push(rowData);
+    }
+    return data;
+}
+
+
+
+//function PrintTable(list) {
+
+//    var html = '';
+//    $('#tbody').html(null);
+
+//    list.forEach((element) => {
+
+//        html += '<tr>'
+//        html += '    <td>1</td>'
+//        html += '    <td><a href="#">' + element.name + '</a></td>'
+//        html += '    <td>04/10/2013</td>'
+//        html += '    <td>Admin</td>'
+//        html += '    <td><span class="status text-success">&bull;</span> Active</td>'
+//        html += '    <td>'
+//        html += '        <a href="#" class="edit" title="Editar"><i class="fa fa-1x fa-pen" title="Editar" ></i></a>'
+//        html += '        <a href="#" class="delete" title="Delete"><i class="fa fa-1x fa-trash" title="Eliminar" ></i></a>'
+//        html += '    </td>'
+//        html += '</tr>'
+
+//    });
+//    $('#tbody').append(html);
+//}

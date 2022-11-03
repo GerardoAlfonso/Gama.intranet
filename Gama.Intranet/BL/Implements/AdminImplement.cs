@@ -1,4 +1,5 @@
-﻿using Gama.Intranet.BL.DAO;
+﻿using EFCore.BulkExtensions;
+using Gama.Intranet.BL.DAO;
 using Gama.Intranet.BL.Models;
 using Gama.Intranet.DAL;
 using Gama.Intranet.Management;
@@ -104,5 +105,30 @@ namespace Gama.Intranet.BL.Implements
             return context.UsuariosPermisosFolders.Where(x => x.IdUsuario == IdUser).ToList();
         }
 
+        public void UpdatePermissionsUser(List<UpdatePermissionsDAO> obj)
+        {
+            var results = context.UsuariosPermisosFolders.Where(x => x.IdUsuario == obj[0].IdUser).ToList();
+            List<UsuariosPermisosFolders> permisos = new List<UsuariosPermisosFolders>();
+            foreach(var item in results)
+            {
+                context.UsuariosPermisosFolders.Remove(item);
+            }
+            context.SaveChanges();
+
+            foreach (var item in obj)
+            {
+                UsuariosPermisosFolders objPermisos = new UsuariosPermisosFolders();
+                objPermisos.IdUsuario = item.IdUser;
+                objPermisos.Write = item.escritura;
+                objPermisos.Read = item.escritura;
+                permisos.Add(objPermisos);
+            }
+            context.BulkInsert(permisos);
+            
+
+
+
+
+        }
     }
 }
