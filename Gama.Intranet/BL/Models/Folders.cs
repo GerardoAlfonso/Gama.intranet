@@ -6,6 +6,8 @@ namespace Gama.Intranet.BL.Models
     {
         [Key]
         public int Id { get; set; }
+        public int IdCategoria { get; set; }
         public string Name { get; set; }
+        
     }
 }

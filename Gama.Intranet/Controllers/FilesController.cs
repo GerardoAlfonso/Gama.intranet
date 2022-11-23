@@ -1,6 +1,7 @@
 ﻿using Gama.Intranet.BL.DAO;
 using Gama.Intranet.BL.DTO.Request;
 using Gama.Intranet.BL.DTO.Response;
+using Gama.Intranet.BL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
@@ -36,10 +37,9 @@ namespace Gama.Intranet.Controllers
             {
                 List<string> path = new List<string>();
                 // production
-                path.Add(filesDAO.GetPublicPath("PublicPath").Value);
                 
                 // develop
-                //path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = path;
@@ -63,50 +63,33 @@ namespace Gama.Intranet.Controllers
             try
             {
                 // production
-                string path = RoutePrivateFiles(null);
-
-                //string route = @"C:\Users\";
-                // get host route
-                
-                // develop
-                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                fileResponseDTO.Status = 1;
-                fileResponseDTO.Message = "Success";
-                fileResponseDTO.Folders = GetFolders(path);
-                fileResponseDTO.Files = GetFiles(path);
-
-            }
-            catch (Exception ex)
-            {
-                fileResponseDTO.Status = 0;
-                fileResponseDTO.Message = "Error: " + ex.Message;
-                fileResponseDTO.Folders = null;
-                fileResponseDTO.Files = null;
-            }
-
-            return Ok(fileResponseDTO);
-        }
-
-        [HttpGet]
-        [Route("GetPublicFiles")]
-        public IActionResult GetPublicFiles() 
-        {
-            FileResponseDTO fileResponseDTO = new FileResponseDTO();
-            try
-            {
-                // production
-                string path = RoutePublicFiles(null);
+                //string path = RoutePublicFiles(null);
                 //string route = @"C:\Users\";
                 
                 // get host route
                 // develoop
-                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var folders = GetFolders(path);
+                var files = GetFiles(path);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    //var a = Path.Combine(Path.GetDirectoryName(item), item);
+                    //dirName.Add(Path.GetFileName(Path.GetDirectoryName(item)));
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+                
+
 
                 fileResponseDTO.Status = 1;
                 fileResponseDTO.Message = "Success";
-                fileResponseDTO.Folders = GetFolders(path);
-                fileResponseDTO.Files = GetFiles(path);
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
 
             }
             catch(Exception ex)
@@ -120,37 +103,7 @@ namespace Gama.Intranet.Controllers
             return Ok(fileResponseDTO);
         }
 
-
-
-
-
-        [HttpPost]
-        [Route("GetPublicFilesToFolder")]
-        public IActionResult GetPublicFilesToFolder(GetFilesDTO filesDTO)
-        {
-            FileResponseDTO fileResponseDTO = new FileResponseDTO();
-            try
-            {
-                string route = filesDTO.Route;
-                // get host route
-                fileResponseDTO.Folders = GetFolders(route);
-                fileResponseDTO.Files = GetFiles(route);
-
-                fileResponseDTO.Status = 1;
-                fileResponseDTO.Message = "Success";
-                
-
-            }
-            catch (Exception ex)
-            {
-                fileResponseDTO.Status = 0;
-                fileResponseDTO.Message = "Error: " + ex.Message;
-                fileResponseDTO.Folders = null;
-                fileResponseDTO.Files = null;
-            }
-
-            return Ok(fileResponseDTO);
-        }
+        
 
         public string RoutePublicFiles(string route)
         {
@@ -199,10 +152,10 @@ namespace Gama.Intranet.Controllers
         public IActionResult Download(string name)
         {
             // production
-            var path = RoutePublicFiles("");
+            //var path = RoutePublicFiles("");
 
             // develop
-            //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var filepath = path + "\\" + name;
             var cadena = name.Substring((name.Length - 4), 4);
             
@@ -224,6 +177,308 @@ namespace Gama.Intranet.Controllers
             }
 
         }
+
+
+        [HttpGet]
+        [Route("GetFolderCategories")]
+        public IActionResult GetFolderCategories()
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                List<FoldersCategories> path = new List<FoldersCategories>();
+                // production
+                path = filesDAO.GetCategories();
+
+                // develop
+                //path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = path;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "1,2")]
+        [Route("FoldersFromCategories")]
+        public IActionResult FoldersFromCategories([FromBody] Folders fc)
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                var folders = filesDAO.FoldersFromCategories(fc.Id);
+
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+                fileResponseDTO.Folders = folders;
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+
+        #region RRHH
+
+        [HttpGet]
+        [Route("GetPublicFiles")]
+        public IActionResult GetPublicFiles()
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                // production
+                //string path = RoutePublicFiles(null);
+                //string route = @"C:\Users\";
+
+                // get host route
+                // develoop
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                path = path + "\\GAMA\\Private";
+                var folders = GetFolders(path);
+                var files = GetFiles(path);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    //var a = Path.Combine(Path.GetDirectoryName(item), item);
+                    //dirName.Add(Path.GetFileName(Path.GetDirectoryName(item)));
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+
+
+
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+        [HttpGet]
+        [Route("GetRRHHFiles")]
+        public IActionResult GetRRHHFiles()
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                // production
+                //string path = RoutePublicFiles(null);
+                //string route = @"C:\Users\";
+
+                // get host route
+                // develoop
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                path = path + "\\GAMA\\Public\\RRHH";
+                var folders = GetFolders(path);
+                var files = GetFiles(path);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    //var a = Path.Combine(Path.GetDirectoryName(item), item);
+                    //dirName.Add(Path.GetFileName(Path.GetDirectoryName(item)));
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+
+
+
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+        [HttpGet]
+        [Route("GetDocumentosFiles")]
+        public IActionResult GetDocumentosFiles()
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                // production
+                //string path = RoutePublicFiles(null);
+                //string route = @"C:\Users\";
+
+                // get host route
+                // develoop
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                path = path + "\\GAMA\\Public\\Documentos";
+                var folders = GetFolders(path);
+                var files = GetFiles(path);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    //var a = Path.Combine(Path.GetDirectoryName(item), item);
+                    //dirName.Add(Path.GetFileName(Path.GetDirectoryName(item)));
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+
+
+
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+        [HttpGet]
+        [Route("GetRecursosFiles")]
+        public IActionResult GetRecursosFiles()
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                // production
+                //string path = RoutePublicFiles(null);
+                //string route = @"C:\Users\";
+
+                // get host route
+                // develoop
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                path = path + "\\GAMA\\Public\\Recursos";
+                var folders = GetFolders(path);
+                var files = GetFiles(path);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    //var a = Path.Combine(Path.GetDirectoryName(item), item);
+                    //dirName.Add(Path.GetFileName(Path.GetDirectoryName(item)));
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+
+
+
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+
+
+
+        [HttpPost]
+        [Route("GetPublicFilesToFolder")]
+        public IActionResult GetPublicFilesToFolder(GetFilesDTO filesDTO)
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                string route = filesDTO.Route;
+                // get host route
+
+
+                var folders = GetFolders(route);
+                var files = GetFiles(route);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+
+
+        #endregion 
+
     }
 }
 

@@ -60,5 +60,14 @@ namespace Gama.Intranet.Controllers
         {
             return View();
         }
+        public IActionResult RRHH()
+        {
+            return View();
+        }
+        public IActionResult Recursos()
+        {
+            return View();
+        }
+
     }
 }

@@ -187,6 +187,23 @@ namespace Gama.Intranet.Controllers
         }
 
         
+        [HttpGet]
+        [Route("LoadHeadersAdmin")]
+        [Authorize(Roles = "1")]
+        public IActionResult LoadHeadersAdmin()
+        {
+            return Ok(1);
+        }
+
+        [HttpGet]
+        [Route("LoadHeadersUser")]
+        [Authorize(Roles = "2")]
+        public IActionResult LoadHeadersUser()
+        {
+            return Ok(2);
+        }
+
+       
     }
 }
 

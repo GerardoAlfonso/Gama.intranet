@@ -21,6 +21,8 @@ namespace Gama.Intranet.DAL
 
         public DbSet<ContenidoHtml> ContenidoHtml { get; set; }
 
+        public DbSet<FoldersCategories> FoldersCategories { get; set; }
+
         // Admin
 
 

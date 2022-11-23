@@ -1,4 +1,5 @@
 ﻿using Gama.Intranet.BL.Models;
+using System.Collections.Generic;
 
 namespace Gama.Intranet.BL.DAO
 {
@@ -6,5 +7,8 @@ namespace Gama.Intranet.BL.DAO
     {
         ParametrosGenerales GetPublicPath (string type);
         ParametrosGenerales GetPrivatePath (string type);
+
+        List<FoldersCategories> GetCategories();
+        List<Folders> FoldersFromCategories(int id);
     }
 }

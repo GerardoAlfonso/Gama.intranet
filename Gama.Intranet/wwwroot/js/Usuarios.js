@@ -33,6 +33,12 @@ $(document).ready(function () {
     LoadUsers();
     LoadControls();
 
+    // events
+    $('#SelectCategories').on('change', function () {
+        LoadSelectFolders();
+    });
+
+
 });
 
 
@@ -61,7 +67,7 @@ function del(_id) {
                 contentType: "application/json",
                 dataType: "json",
 
-                data: JSON.stringify(obj) ,
+                data: JSON.stringify(obj),
                 success: function (_result) {
                     if (_result.status == 1) {
                         RefreshTable()
@@ -282,7 +288,6 @@ function UpdateUser() {
 
 function LoadControls() {
 
-
     // cargar roles
     $.ajax({
         type: "GET",
@@ -311,7 +316,6 @@ function LoadControls() {
             //alert("error");
         }
     });
-
 
     // cargar status
     $.ajax({
@@ -342,10 +346,10 @@ function LoadControls() {
         }
     });
 
-    // cargar listado de carpetas
+    // cargar listado de categorias por carpeta
     $.ajax({
         type: "GET",
-        url: getHostName() + "/Files/GetPrivateFiles",
+        url: getHostName() + "/Files/GetFolderCategories",
         dataType: "json",
         contentType: "Application/json",
         headers: {
@@ -353,17 +357,13 @@ function LoadControls() {
         },
         success: function (result) {
             if (result.status == 1) {
-                debugger;
                 var html = ''
-                $('#SelectFolders').html(html)
+                $('#SelectCategories').html(null)
 
-                result.folders.forEach((element) => {
-                    html += '<option value="">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '</option>'
+                result.data.forEach((element) => {
+                    html += '<option value = "' + element.id + '" >' + element.nombre + '</option >'
                 })
-
-                
-                
-                $('#SelectFolders').append(html)
+                $('#SelectCategories').html(html)
             }
             else {
                 alert(result.message)
@@ -371,9 +371,49 @@ function LoadControls() {
         },
         error: function (err) {
             //alert("error");
+        },
+        complete: function () {
+            // cargar listado de carpetas por categoria
+            LoadSelectFolders();
         }
     });
 
+    
+
+}
+
+
+function LoadSelectFolders() {
+    // cargar listado de carpetas
+    var obj = { "Id": parseInt($('#SelectCategories').val()) }
+    debugger
+    $.ajax({
+        type: "POST",
+        url: getHostName() + "/Files/FoldersFromCategories",
+        dataType: "json",
+        contentType: "Application/json",
+        headers: {
+            Authorization: 'Bearer ' + window.localStorage.getItem("token")
+        },
+        data: JSON.stringify(obj),
+        success: function (result) {
+            if (result.status == 1) {
+                debugger;
+                var html = ''
+                $('#SelectFolders').html(null)
+
+                result.folders.forEach((element) => {
+                    html += '<option value="' + element.id + '">' + element.name + '</option>'
+                })
+                $('#SelectFolders').html(html)
+            }
+            else {
+                alert(result.message)
+            }
+        },
+        error: function (err) {
+        }
+    });
 }
 
 

@@ -15,7 +15,7 @@ $(document).ready(function () {
             success: function (result) {
                 if (result.status == 1) {
                     debugger;
-                    sessionStorage.setItem("path", result.data[0]);
+                    sessionStorage.setItem("path", result.data[0] + "\\GAMA\\Private");
                 }
                 else {
                     alert(result.message)
@@ -37,8 +37,8 @@ function PrintFilesAndFolders(folders, files) {
         html += '<div class="col-lg-3 mb-2 contenedor">'
         html += '    <div class="card bg-light rounded p-4 mb-4">'
         html += '        <center><i class="fa fa-3x fa-folder-open text-primary mb-4"></i></center>'
-        html += '        <div class=contenedor > <center><h7 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h7></center></div>'
-        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="OpenFolder(' + "'" + ReplaceDirectory(element).split(" ").slice(-1)[0] + "'" + ')" class="btn btn-info">Abrir</button></center></div>'
+        html += '        <div class=contenedor > <center><h7 class="mb-4">' + element + '<span class="d-block text-body"></span></h7></center></div>'
+        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="OpenFolder(' + "'" + element + "'" + ')" class="btn btn-info">Abrir</button></center></div>'
         html += '    </div>'
         html += '</div>'
 
@@ -50,8 +50,8 @@ function PrintFilesAndFolders(folders, files) {
         html += '<div class="col-lg-3 mb-2 contenedor">'
         html += '    <div class="card bg-light rounded p-4 mb-4">'
         html += '        <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center>'
-        html += '        <div class=contenedor > <center><h7 class="mb-4">' + ReplaceDirectory(element).split(" ").slice(-1)[0] + '<span class="d-block text-body"></span></h7></center></div>'
-        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="Downloadfile(' + "'" + ReplaceDirectory(element).split(" ").slice(-1)[0] + "'" + ')" class="btn btn-info">PDF</button></center></div>'
+        html += '        <div class=contenedor > <center><h7 class="mb-4">' + element + '<span class="d-block text-body"></span></h7></center></div>'
+        html += '        <div class="card-footer bg-light" > <center><button type="button" onclick="Downloadfile(' + "'" + element + "'" + ')" class="btn btn-info">PDF</button></center></div>'
         html += '    </div>'
         html += '</div>'
 
@@ -69,10 +69,9 @@ function AddFolderToRoute() {
     sessionStorage.setItem("CurrentRoute", route);
 }
 
-function ReplaceDirectory(directory) {
-    return directory.replace(/\\/g, " ");
-
-}
+//function ReplaceDirectory(directory) {
+//    return directory.replace(/\\/g, " ");
+//}
 
 
 // esto no sale hoy xD

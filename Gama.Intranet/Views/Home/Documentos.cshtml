@@ -1,3 +1,62 @@
-﻿@{
-    ViewData["Title"] = "Documentos - GamaIntranet";
+﻿ @{
+    ViewData["Title"] = "Documentos y formularios";
+    //Layout = null;
 }
+
+<link rel="stylesheet" href=~/css/admin.css/>
+<script src="~/js~/js/admin.js"></script>
+
+<div class="">
+
+    <div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase text-center mb-5">Documentos y formularios</h1>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="folders-nav">
+                
+            </ol>
+            </nav>
+        <div class="row" id="files-area">
+                
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-folder-open text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Abrir</button></center></div>
+                </div>
+                </div>
+
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Descargar PDF</button></center></div>
+                </div>
+                </div>
+
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-file text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">KEVIN.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Abrir</button></center></div>
+                </div>
+                </div>
+
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Descargar PDF</button></center></div>
+                </div>
+                </div>
+            </div>
+                 
+        </div>
+    </div>
+</div>
+       
+@section Scripts{
+    <script src="~/js/Documentos.js" asp-append-version="true"></script>
+}
+

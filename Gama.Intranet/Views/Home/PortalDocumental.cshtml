@@ -1,96 +1,66 @@
-﻿@{
+﻿ @{
     ViewData["Title"] = "Home Page";
-    Layout = null;
+    //Layout = null;
 }
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication1</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href=~/css/admin.css/>
-    <script src="~/js~/js/admin.js"></script>
 
-</head>
-<body class="sidebar-closed sidebar-collapse">
-    <style>
-        .main-footer {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 40px;
-        }
-    </style>
-    <partial name="_Navbar" />
+<link rel="stylesheet" href=~/css/admin.css/>
+<script src="~/js~/js/admin.js"></script>
+
+
     
-    <div class="">
+<div class="">
 
-      <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <h1 class="display-4 text-uppercase text-center mb-5">Documentos publicos</h1>
+    <div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase text-center mb-5">Documentos Privados</h1>
 
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb" id="folders-nav">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" id="folders-nav">
                 
-              </ol>
-             </nav>
-            <div class="row" id="files-area">
+            </ol>
+            </nav>
+        <div class="row" id="files-area">
                 
-                  <div class="col-lg-3 mb-2 contenedor">
-                    <div class="card bg-light rounded p-4 mb-4">
-                        <center><i class="fa fa-3x fa-folder-open text-primary mb-4"></i></center> 
-                            <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
-                            <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Abrir</button></center></div>
-                    </div>
-                 </div>
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-folder-open text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Abrir</button></center></div>
+                </div>
+                </div>
 
-                  <div class="col-lg-3 mb-2 contenedor">
-                    <div class="card bg-light rounded p-4 mb-4">
-                        <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center> 
-                            <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
-                            <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Descargar PDF</button></center></div>
-                    </div>
-                 </div>
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Descargar PDF</button></center></div>
+                </div>
+                </div>
 
-                  <div class="col-lg-3 mb-2 contenedor">
-                    <div class="card bg-light rounded p-4 mb-4">
-                        <center><i class="fa fa-3x fa-file text-primary mb-4"></i></center> 
-                            <div class=contenedor><center><h7 class="mb-4">KEVIN.pdf <span class="d-block text-body"></span></h7></center></div>
-                            <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Abrir</button></center></div>
-                    </div>
-                 </div>
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-file text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">KEVIN.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Abrir</button></center></div>
+                </div>
+                </div>
 
-                  <div class="col-lg-3 mb-2 contenedor">
-                    <div class="card bg-light rounded p-4 mb-4">
-                        <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center> 
-                            <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
-                            <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Descargar PDF</button></center></div>
-                    </div>
-                 </div>
-             </div>
-                 
+                <div class="col-lg-3 mb-2 contenedor">
+                <div class="card bg-light rounded p-4 mb-4">
+                    <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center> 
+                        <div class=contenedor><center><h7 class="mb-4">PRUEBAX.pdf <span class="d-block text-body"></span></h7></center></div>
+                        <div class="card-footer bg-light"><center><button type="button" onclick="alert()" class="btn btn-info">Descargar PDF</button></center></div>
+                </div>
+                </div>
             </div>
+                 
         </div>
     </div>
+</div>
        
- @*</div>*@
 
-    <partial name="_Footer" />
-
-    <!-- jQuery -->
-    <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/root.js" asp-append-version="true"></script>
+@section Scripts{
     <script src="~/js/PortalDocumental.js" asp-append-version="true"></script>
-</body>
-</html>
+    <script src="~/js/Checkout.js" asp-append-version="true"></script>
+}
+    

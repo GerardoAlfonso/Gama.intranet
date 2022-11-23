@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\Headers.js" />
     <Content Remove="wwwroot\js\Home.js" />
   </ItemGroup>
 
@@ -14,6 +15,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\Home.js" />
+    <None Include="wwwroot\js\Headers.js" />
   </ItemGroup>
 
   <ItemGroup>

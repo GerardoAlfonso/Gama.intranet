@@ -1,6 +1,7 @@
 ﻿using Gama.Intranet.BL.DAO;
 using Gama.Intranet.BL.Models;
 using Gama.Intranet.DAL;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Gama.Intranet.BL.Implements
@@ -14,6 +15,23 @@ namespace Gama.Intranet.BL.Implements
             this.context = context;
         }
 
+        public List<Folders> FoldersFromCategories(int id)
+        {
+            return context.Folders.Where(x => x.IdCategoria == id).ToList();
+        }
+
+        public List<FoldersCategories> GetCategories()
+        {
+            List<FoldersCategories> categories = context.FoldersCategories.ToList();
+            //List<string> list = new List<string>();
+
+            //foreach (var item in categories)
+            //{
+            //    list.Add(item.Nombre);
+            //}
+            return categories;
+        }
+
         public ParametrosGenerales GetPrivatePath(string type)
         {
             ParametrosGenerales param = context.ParametrosGenerales.FirstOrDefault(x => x.Name == type);
@@ -25,5 +43,7 @@ namespace Gama.Intranet.BL.Implements
             ParametrosGenerales param = context.ParametrosGenerales.FirstOrDefault(x => x.Name == type);
             return param;
         }
+
+
     }
 }
