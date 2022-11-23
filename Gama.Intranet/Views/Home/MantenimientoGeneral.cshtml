@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <!-- Theme style -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -23,111 +23,119 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <link  rel="stylesheet" href=~/css/mantenimiento.css/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href=~/css/mantenimiento.css />
+    <link rel="stylesheet" href=~/lib/RichText/css/richtext.min.css />
+    @*<link rel="stylesheet" href=~/lib/RichText/css/richtext.scss />*@
+    <script src="~/js/Richtext.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@*    <link href="node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+*@
 
 </head>
 
 <body class="sidebar-closed sidebar-collapse">
-    
+
     <style>
         .main-footer {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 40px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
         }
     </style>
     <partial name="_Navbar" />
-    
+
     <div class="">
-    <div class="container-xxl">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                   <div class="col-sm-5">
-                        <h2>User <b>Management</b></h2>
+        <div class="container-xxl">
+           
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h2>User <b>Management</b></h2>
+                            </div>
+
+                        </div>
                     </div>
-                   
+                    <table id="example" class="table table-border table-hover">
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="inactivos" onclick="RefreshTable()">
+                            <label class="form-check-label" for="inactivos">Mostrar usuarios inactivos</label>
+                        </div>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>IdPage</th>
+                                <th>Name</th>
+                                <th>Editar Contenido</th>
+                                <th>UserCreation</th>
+                                <th>CreatedAt</th>
+                                <th>UpdatedAt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr role="row" class="odd">
+                                <td class="sorting_1">1</td>
+                                <td class="sorting_1">2</td>
+                                <td>Bitacora</td>
+                                <td>
+                                    <a href="#" class="edit" onclick="LoadUser(1)" title="Editar" data-bs-toggle="modal"
+                                       data-bs-target="#Editor"> <i class="fa fa-1x fa-pen" title="Editar"></i></a>
+                                </td>
+                                <td>Administrador</td>
+                                <td>2022-10-22</td>
+                                <td>2022-10-29</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-            <table id="example" class="table table-border table-hover">
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="inactivos" onclick="RefreshTable()">
-                    <label class="form-check-label" for="inactivos">Mostrar usuarios inactivos</label>
-                </div>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>IdPage</th>						
-                        <th>Name</th>
-                        <th>Editar Contenido</th>
-                        <th>UserCreation</th>
-                        <th>CreatedAt</th>
-                        <th>UpdatedAt</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-                   <tr role="row" class="odd">
-                    <td class="sorting_1">1</td>
-                    <td class="sorting_1">2</td>
-                    <td>Bitacora</td>
-                    <td>
-                            <a href="#" class="edit" onclick="LoadUser(1)" title="Editar" data-bs-toggle="modal"
-                            data-bs-target="#Editor"> <i class="fa fa-1x fa-pen" title="Editar"></i></a>
-                    </td>
-                    <td>Administrador</td>
-                    <td>2022-10-22</td>
-                    <td>2022-10-29</td>
-                </tr>                     
-                </tbody>
-            </table>
-           
         </div>
     </div>
-    </div>
-        </div>
 
 
     <partial name="_Footer" />
 
     <!-- jQuery -->
-     <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/RichText/js/jquery.richtext.js"></script>
+    <script src="~/lib/RichText/js/jquery.richtext.min.js"></script>
     <script src="~/js/root.js" asp-append-version="true"></script>
     @*<script src="~/js/Mantenimiento.js" ></script>*@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="~/js/Usuarios.js"></script>
+    
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    @*<script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>*@
 
-  
-     <!-- MODAL PERMISOS -->
+
+    <!-- MODAL PERMISOS -->
     <div class="modal fade" id="Editor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header bg-primary">
-            <h5 class="exampleModalLabel" id="exampleModalLabel">Administracion de <b>Archivos</b></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-                <H1>DJDJJD</H1>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" onclick="UpdateUser()">Guardar</button>
-          </div>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="exampleModalLabel" id="exampleModalLabel">Administracion de <b>Archivos</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input class="content-richtext" id="contain-richtext" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success" onclick="UpdateUser()">Guardar</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
 </body>
