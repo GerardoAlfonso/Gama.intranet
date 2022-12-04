@@ -15,7 +15,7 @@ $(document).ready(function () {
             success: function (result) {
                 if (result.status == 1) {
                     debugger;
-                    sessionStorage.setItem("path", result.data[0] + "\\GAMA\\Public\\RRHH");
+                    sessionStorage.setItem("path", result.data[0]);
                 }
                 else {
                     alert(result.message)

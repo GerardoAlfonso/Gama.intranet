@@ -9,6 +9,7 @@ namespace Gama.Intranet.BL.Models
         public int Id { get; set; }
         public int IdUsuario { get; set; }
         public int IdFolder { get; set; }
+        public int IdCategoria{ get; set; }
         public Boolean Read { get; set; }
         public Boolean Write { get; set; }
 

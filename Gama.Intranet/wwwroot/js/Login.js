@@ -61,24 +61,29 @@ $(document).ready(function () {
             data: JSON.stringify(obj),
             success: function (result) {
                 if (result.status == 1) {
+                    debugger;
                     window.localStorage.setItem("token", result.token);
+                    window.localStorage.setItem("UserName", result.userName);
+                    window.localStorage.setItem("IdUser", result.idUser);
 
                     setTimeout(() => {
                         $('#modal').iziModal('close');
-                        window.location = getHostName();
+                        window.location = getHostName() + '/Home/PortalDocumental';
                     }, "3000")
                     
                     
                 }
                 else {
                     alert(result.message)
+                    $('#modal').iziModal('close');
                 }
             },
             error: function (err) {
                 alert("error");
+                $('#modal').iziModal('close');
             },
             complete: function () {
-
+                //$('#modal').iziModal('close');
             }
         });
     }

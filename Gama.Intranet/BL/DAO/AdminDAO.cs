@@ -1,4 +1,5 @@
-﻿using Gama.Intranet.BL.Models;
+﻿using Gama.Intranet.BL.DTO.Response;
+using Gama.Intranet.BL.Models;
 using System.Collections.Generic;
 
 namespace Gama.Intranet.BL.DAO
@@ -11,8 +12,16 @@ namespace Gama.Intranet.BL.DAO
         List<Usuario> GetAllUsersActive();
         List<Roles> GetRoles();
         List<LogStatus> GetStatus();
-        List<UsuariosPermisosFolders> GetPermissionsFolders(int IdUser);
+        List<PermissionsResponseDTO> GetPermissionsFolders(int IdUser);
 
         void UpdatePermissionsUser(List<UpdatePermissionsDAO> obj);
+
+        int GetIdCategoria(string categoria);
+        int GetIdFolder(string folder);
+
+        string GetNameCategoria(int categoria);
+        string GetNameFolder(int folder);
+
+
     }
 }

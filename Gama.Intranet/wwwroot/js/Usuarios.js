@@ -425,6 +425,13 @@ function GetPermissions(_id) {
         "Id": parseInt(_id)
     }
 
+    // limpiar checkbox
+    $("#chkLectura").prop("checked", false);
+    $("#chkEscritura").prop("checked", false);
+
+
+    $('#nameUser').html(window.localStorage.getItem("UserName"));
+
     // cargar roles
     $.ajax({
         type: "POST",
@@ -445,7 +452,8 @@ function GetPermissions(_id) {
                 result.data.forEach((element) => {
                     html += '<tr>'
                     html += '    <td>' + element.id + '</td>'
-                    html += '    <td><a href="#">' + element.idFolder + '</a></td>'
+                    html += '    <td><a href="#">' + element.categoria + '</a></td>'
+                    html += '    <td><a href="#">' + element.folder + '</a></td>'
                     html += '    <td>' + element.read + '</td>'
                     html += '    <td>' + element.write + '</td>'
                     html += '    <td>'
@@ -476,14 +484,16 @@ function AgregarPermiso() {
     var obj = {
         "id": parseInt($('#SelectFolders option:selected').val()),
         "Folder": parseInt($('#SelectFolders option:selected').val()),
+        "IdCategoria": parseInt($('#SelectCategories, option:selected').val()),
         "Read": $("#chkLectura").is(":checked"),
         "Write": $("#chkEscritura").is(":checked")
     }
     PermisosUsuario.push(obj);
-
+    debugger;
     var html = ''
     html += '<tr>'
     html += '    <td></td>'
+    html += '    <td><a href="#">' + $('#SelectCategories option:selected').text(), + '</a></td>'
     html += '    <td><a href="#">' + $('#SelectFolders option:selected').text(), + '</a></td>'
     html += '    <td>' + obj.Read + '</td>'
     html += '    <td>' + obj.Write + '</td>'
@@ -505,7 +515,8 @@ function UpdatePermissions() {
     //json.forEach(function (v) { delete v.no });
     json.forEach(function (v) { delete v.accion });
     json.forEach(function (v) {
-        v.nombrearchivo = v.nombrearchivo.replace('<a href="#">', '').replace('</a>', '')
+        v.carpeta = v.carpeta.replace('<a href="#">', '').replace('</a>', '')
+        v.subcarpeta = v.subcarpeta.replace('<a href="#">', '').replace('</a>', '')
     });
 
     var obj = []
@@ -514,10 +525,16 @@ function UpdatePermissions() {
             'IdUSer': IdCurrentUser,
             'escritura': element.escritura === 'true',
             'lectura': element.lectura === 'true',
-            'nombrearchivo': element.nombrearchivo
+            'Folder': element.subcarpeta,
+            'Categoria': element.carpeta
         })
     });
 
+    if (obj.length == 0) {
+        obj.push({
+            'IdUSer': IdCurrentUser
+        })
+    }
 
     $.ajax({
         type: "POST",

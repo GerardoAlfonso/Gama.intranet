@@ -4,18 +4,16 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\js\Headers.js" />
-    <Content Remove="wwwroot\js\Home.js" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\Home.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\Home.js" />
-    <None Include="wwwroot\js\Headers.js" />
   </ItemGroup>
 
   <ItemGroup>

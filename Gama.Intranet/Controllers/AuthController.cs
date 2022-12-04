@@ -71,6 +71,8 @@ namespace Gama.Intranet.Controllers
                 logIn.Status = 1;
                 logIn.Message = "Ok";
                 logIn.Token = _loggedUser.Token;
+                logIn.UserName = _loggedUser.Name;
+                logIn.IdUser = _loggedUser.Id;
                 logIn.ShouldChangePassword = _loggedUser.ShouldChangePassword;
 
                 logsDAO.WriteLog(new Logs(1, "Login", "Inicio de sesion exitoso", result.Id, DateTime.Now));

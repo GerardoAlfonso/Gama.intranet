@@ -7,7 +7,8 @@ namespace Gama.Intranet.BL.DAO
         public int IdUser { get; set; }
         public bool lectura { get; set; }
         public bool escritura { get; set; }
-        public string nombrearchivo { get; set; }
-        
+        public string Folder { get; set; }
+        public string Categoria{ get; set; }
+
     }
 }

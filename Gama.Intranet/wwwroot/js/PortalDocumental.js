@@ -9,13 +9,13 @@ $(document).ready(function () {
     function LoadPath() {
         $.ajax({
             type: "GET",
-            url: getHostName() + "/Files/GetPublicPath",
+            url: getHostName() + "/Files/GetPrivatePath",
             dataType: "json",
             contentType: "Application/json",
             success: function (result) {
                 if (result.status == 1) {
                     debugger;
-                    sessionStorage.setItem("path", result.data[0] + "\\GAMA\\Private");
+                    sessionStorage.setItem("path", result.data[0]);
                 }
                 else {
                     alert(result.message)
@@ -99,9 +99,12 @@ function OpenFolder(name) {
 function GetRootFiles() {
     $.ajax({
         type: "GET",
-        url: getHostName() + "/Files/GetPublicFiles",
+        url: getHostName() + "/Files/GetPrivateFiles",
         dataType: "json",
         contentType: "Application/json",
+        headers: {
+            Authorization: 'Bearer ' + window.localStorage.getItem("token")
+        },
         success: function (result) {
             if (result.status == 1) {
                 PrintFilesAndFolders(result.folders, result.files)
@@ -142,18 +145,25 @@ function LoadFolder() {
     {
         Route: sessionStorage.getItem("CurrentRoute"),
         Token: "",
-        IdUser: 0
+        IdUser: parseInt(window.localStorage.getItem("IdUser")) 
     }
+
     $.ajax({
         type: "POST",
-        url: getHostName() + "/Files/GetPublicFilesToFolder",
+        url: getHostName() + "/Files/GetPrivateFilesToFolder",
         dataType: "json",
-        contentType: "Application/json",
         data: JSON.stringify(obj),
+        contentType: "Application/json",       
+        headers: {
+            Authorization: 'Bearer ' + window.localStorage.getItem("token")
+        },
         success: function (result) {
 
             if (result.status == 1) {
                 PrintFilesAndFolders(result.folders, result.files)
+            }
+            else if (result.status == 2) {
+                $("#files-area").html(result.message);
             }
             else {
                 alert(result.message)

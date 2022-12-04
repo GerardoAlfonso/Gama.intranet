@@ -1,5 +1,6 @@
 ﻿using EFCore.BulkExtensions;
 using Gama.Intranet.BL.DAO;
+using Gama.Intranet.BL.DTO.Response;
 using Gama.Intranet.BL.Models;
 using Gama.Intranet.DAL;
 using Gama.Intranet.Management;
@@ -100,35 +101,113 @@ namespace Gama.Intranet.BL.Implements
 
 
         // Permissions
-        public List<UsuariosPermisosFolders> GetPermissionsFolders(int IdUser)
+        public List<PermissionsResponseDTO> GetPermissionsFolders(int IdUser)
         {
-            return context.UsuariosPermisosFolders.Where(x => x.IdUsuario == IdUser).ToList();
+            var result = context.UsuariosPermisosFolders.Where(x => x.IdUsuario == IdUser).ToList();
+            List<PermissionsResponseDTO> list = new List<PermissionsResponseDTO>();
+            foreach(var item in result)
+            {
+                PermissionsResponseDTO obj = new PermissionsResponseDTO();
+                obj.Id = item.Id;
+                obj.Write = item.Write;
+                obj.Read = item.Read;
+                obj.Folder = GetNameFolder(item.IdFolder);
+                obj.Categoria = GetNameCategoria(item.IdCategoria);
+                
+                list.Add(obj);
+            }
+
+            return list;
         }
 
-        public void UpdatePermissionsUser(List<UpdatePermissionsDAO> obj)
+        public void UpdatePermissionsUser(List<UpdatePermissionsDAO> permissions)
         {
-            var results = context.UsuariosPermisosFolders.Where(x => x.IdUsuario == obj[0].IdUser).ToList();
+            List<UsuariosPermisosFolders> list = new List<UsuariosPermisosFolders>();
+            int idUser = 0;
+            foreach (var item in permissions)
+            {
+                // validar si se esta recibiendo una carpeta o solo el id usuario
+                idUser = item.IdUser;
+                if (item.Categoria != null)
+                {
+                    UsuariosPermisosFolders obj = new UsuariosPermisosFolders();
+                    obj.IdFolder = item.Folder == null ? 0 : GetIdFolder(item.Folder);
+                    obj.IdCategoria = item.Categoria == null ? 0 : GetIdCategoria(item.Categoria);
+                    obj.IdUsuario = item.IdUser;
+                    obj.Write = item.escritura;
+                    obj.Read = item.lectura;
+                    list.Add(obj);
+                }
+                
+            }
+
+            // 
+            var results = context.UsuariosPermisosFolders.Where(x => x.IdUsuario == idUser).ToList();
             List<UsuariosPermisosFolders> permisos = new List<UsuariosPermisosFolders>();
             foreach(var item in results)
             {
                 context.UsuariosPermisosFolders.Remove(item);
             }
+            // delete old permissions
             context.SaveChanges();
 
-            foreach (var item in obj)
+            // validar si se debe insertar permisos
+            if (permissions != null)
             {
-                UsuariosPermisosFolders objPermisos = new UsuariosPermisosFolders();
-                objPermisos.IdUsuario = item.IdUser;
-                objPermisos.Write = item.escritura;
-                objPermisos.Read = item.escritura;
-                permisos.Add(objPermisos);
+                context.BulkInsert(list);
             }
-            context.BulkInsert(permisos);
             
 
+        }
 
+        public int GetIdCategoria(string categoria)
+        {
+            var result = context.FoldersCategories.FirstOrDefault(x => x.Nombre == categoria);
+            if(result == null)
+            {
+                return -1;
+            }
+            else
+            {
+                return result.Id;
+            }
+        }
+        public int GetIdFolder(string folder)
+        {
+            var result = context.Folders.FirstOrDefault(x => x.Name == folder);
+            if (result == null)
+            {
+                return -1;
+            }
+            else
+            {
+                return result.Id;
+            }
+        }
 
-
+        public string GetNameCategoria(int categoria)
+        {
+            var result = context.FoldersCategories.FirstOrDefault(x => x.Id == categoria);
+            if (result != null)
+            {
+                return result.Nombre;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public string GetNameFolder(int folder)
+        {
+            var result = context.Folders.FirstOrDefault(x => x.Id == folder);
+            if(result != null)
+            {
+                return result.Name;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

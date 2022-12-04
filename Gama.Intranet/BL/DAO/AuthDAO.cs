@@ -14,5 +14,6 @@ namespace Gama.Intranet.BL.DAO
         int LogOut(Usuario usuario);
         Usuario ChangePassword(Usuario DBEntity, ChangePasswordDTO usuario);
 
+        bool VerifyPermission(int IdUser, string folder);
     }
 }

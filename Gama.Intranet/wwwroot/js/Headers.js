@@ -68,6 +68,7 @@ $(document).ready(function () {
 function LogOut() {
     debugger;
     window.localStorage.removeItem("token")
+    localStorage.clear();
     window.location = getHostName();
 }
 function redirect(page) {

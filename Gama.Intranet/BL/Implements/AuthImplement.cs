@@ -99,6 +99,71 @@ namespace Gama.Intranet.BL.Implements
             throw new System.NotImplementedException();
         }
 
-       
+        public bool VerifyPermission(int idUser, string folder)
+        {
+            int idFolder = GetIdFolder(folder);
+            var result = new UsuariosPermisosFolders();
+            if(idFolder == -1)
+            {
+                idFolder = GetIdCategoria(folder);
+                result = context.UsuariosPermisosFolders.FirstOrDefault(x => x.IdCategoria == idFolder && x.IdUsuario == idUser);
+            }
+            else
+            {
+                result = context.UsuariosPermisosFolders.FirstOrDefault(x => x.IdFolder == idFolder && x.IdUsuario == idUser);
+            }
+            
+            if(result == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+
+        //public string GetUserName(string username)
+        //{
+        //    var result = context.Usuario.FirstOrDefault(x => x.Name == username);
+        //    return result.Name;
+        //}
+
+        public int GetIdCategoria(string categoria)
+        {
+            var result = context.FoldersCategories.FirstOrDefault(x => x.Nombre == categoria);
+            if(result != null)
+            {
+                return result.Id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        public int GetIdFolder(string folder)
+        {
+            var result = context.Folders.FirstOrDefault(x => x.Name == folder);
+            if(result != null)
+            {
+                return result.Id;
+            }else
+            {
+                return -1;
+            }
+        }
+
+        public string GetNameCategoria(int categoria)
+        {
+            var result = context.FoldersCategories.FirstOrDefault(x => x.Id == categoria);
+            return result.Nombre;
+        }
+        public string GetNameFolder(int folder)
+        {
+            var result = context.Folders.FirstOrDefault(x => x.Id == folder);
+            return result.Name;
+        }
     }
 }

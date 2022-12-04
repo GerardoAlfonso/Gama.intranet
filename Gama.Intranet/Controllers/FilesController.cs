@@ -18,13 +18,14 @@ namespace Gama.Intranet.Controllers
     public class FilesController : ControllerBase
     {
         private readonly FilesDAO filesDAO;
+        private readonly AuthDAO authDAO;
         private readonly IWebHostEnvironment environment;
-        
 
-        public FilesController(FilesDAO filesDAO, IWebHostEnvironment hostEnvironment)
+        public FilesController(FilesDAO filesDAO, AuthDAO authDAO, IWebHostEnvironment environment)
         {
             this.filesDAO = filesDAO;
-            environment = hostEnvironment;
+            this.authDAO = authDAO;
+            this.environment = environment;
         }
 
         //
@@ -37,9 +38,41 @@ namespace Gama.Intranet.Controllers
             {
                 List<string> path = new List<string>();
                 // production
-                
+                //path.Add(RoutePublicFiles(""));
+
                 // develop
-                path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                //path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                path.Add(AppDomain.CurrentDomain.BaseDirectory + "GAMA\\Public");
+
+                dto.Status = 1;
+                dto.Message = "Success";
+                dto.Data = path;
+            }
+            catch (Exception ex)
+            {
+                dto.Status = 0;
+                dto.Message = "Error: " + ex;
+                dto.Data = null;
+            }
+            return Ok(dto);
+        }
+
+        //
+        [HttpGet]
+        [Route("GetPrivatePath")]
+        public IActionResult GetPrivatePath()
+        {
+            GenericDTO dto = new GenericDTO();
+            try
+            {
+                List<string> path = new List<string>();
+                // production
+                path.Add(RoutePrivateFiles(""));
+
+                // develop
+                //path.Add(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                //path.Add(AppDomain.CurrentDomain.BaseDirectory + "GAMA\\Private");
+
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = path;
@@ -55,7 +88,7 @@ namespace Gama.Intranet.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "1,0")]
+        [Authorize(Roles = "1,2")]
         [Route("GetPrivateFiles")]
         public IActionResult GetPrivateFiles()
         {
@@ -63,12 +96,15 @@ namespace Gama.Intranet.Controllers
             try
             {
                 // production
-                //string path = RoutePublicFiles(null);
+                string path = RoutePrivateFiles(null);
                 //string route = @"C:\Users\";
-                
+
                 // get host route
                 // develoop
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                //string path = AppDomain.CurrentDomain.BaseDirectory + "GAMA\\Private";
+
                 var folders = GetFolders(path);
                 var files = GetFiles(path);
                 List<string> dirName = new List<string>();
@@ -83,7 +119,7 @@ namespace Gama.Intranet.Controllers
                 {
                     fileName.Add(Path.GetFileName(item));
                 }
-                
+
 
 
                 fileResponseDTO.Status = 1;
@@ -92,7 +128,7 @@ namespace Gama.Intranet.Controllers
                 fileResponseDTO.Files = fileName;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 fileResponseDTO.Status = 0;
                 fileResponseDTO.Message = "Error: " + ex.Message;
@@ -103,7 +139,67 @@ namespace Gama.Intranet.Controllers
             return Ok(fileResponseDTO);
         }
 
-        
+
+        [HttpPost]
+        [Route("GetPrivateFilesToFolder")]
+        [Authorize(Roles = "1,2")]
+        public IActionResult GetPrivateFilesToFolder([FromBody] GetFilesDTO filesDTO)
+        {
+            FileResponseDTO fileResponseDTO = new FileResponseDTO();
+            try
+            {
+                string route = filesDTO.Route;
+                string[] directories = route.Split(Path.DirectorySeparatorChar);
+                int position = directories.Length - 1;
+
+                var a = authDAO.VerifyPermission(filesDTO.IdUser, directories[position]);
+                if (!a)
+                {
+                    fileResponseDTO.Status = 2;
+                    fileResponseDTO.Message = "No tiene permiso para ver esta carpeta";
+                    fileResponseDTO.Folders = null;
+                    fileResponseDTO.Files = null;
+                    return Ok(fileResponseDTO);
+                }
+
+
+                // get host route
+                //string route = AppDomain.CurrentDomain.BaseDirectory + "GAMA\\";
+
+                var folders = GetFolders(route);
+                var files = GetFiles(route);
+                List<string> dirName = new List<string>();
+                foreach (var item in folders)
+                {
+                    dirName.Add(Path.GetFileName(item));
+                }
+                List<string> fileName = new List<string>();
+                foreach (var item in files)
+                {
+                    fileName.Add(Path.GetFileName(item));
+                }
+
+                fileResponseDTO.Folders = dirName;
+                fileResponseDTO.Files = fileName;
+                fileResponseDTO.Status = 1;
+                fileResponseDTO.Message = "Success";
+
+
+            }
+            catch (Exception ex)
+            {
+                fileResponseDTO.Status = 0;
+                fileResponseDTO.Message = "Error: " + ex.Message;
+                fileResponseDTO.Folders = null;
+                fileResponseDTO.Files = null;
+            }
+
+            return Ok(fileResponseDTO);
+        }
+
+
+
+
 
         public string RoutePublicFiles(string route)
         {
@@ -213,7 +309,7 @@ namespace Gama.Intranet.Controllers
             FileResponseDTO fileResponseDTO = new FileResponseDTO();
             try
             {
-                var folders = filesDAO.FoldersFromCategories(fc.Id);
+                var folders = filesDAO.FoldersFromCategories((int)fc.Id);
 
                 fileResponseDTO.Status = 1;
                 fileResponseDTO.Message = "Success";
@@ -247,8 +343,11 @@ namespace Gama.Intranet.Controllers
 
                 // get host route
                 // develoop
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                path = path + "\\GAMA\\Private";
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\GAMA\\Public\\RRHH";
+
+
+                //path = path + "\\GAMA\\Private";
                 var folders = GetFolders(path);
                 var files = GetFiles(path);
                 List<string> dirName = new List<string>();
@@ -296,8 +395,9 @@ namespace Gama.Intranet.Controllers
 
                 // get host route
                 // develoop
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                path = path + "\\GAMA\\Public\\RRHH";
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\GAMA\\Public\\RRHH";
+
                 var folders = GetFolders(path);
                 var files = GetFiles(path);
                 List<string> dirName = new List<string>();
@@ -345,8 +445,9 @@ namespace Gama.Intranet.Controllers
 
                 // get host route
                 // develoop
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                path = path + "\\GAMA\\Public\\Documentos";
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\GAMA\\Public\\Documentos";
+
                 var folders = GetFolders(path);
                 var files = GetFiles(path);
                 List<string> dirName = new List<string>();
@@ -394,8 +495,9 @@ namespace Gama.Intranet.Controllers
 
                 // get host route
                 // develoop
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                path = path + "\\GAMA\\Public\\Recursos";
+                //string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\GAMA\\Public\\Recursos";
+                
                 var folders = GetFolders(path);
                 var files = GetFiles(path);
                 List<string> dirName = new List<string>();
@@ -442,7 +544,7 @@ namespace Gama.Intranet.Controllers
             {
                 string route = filesDTO.Route;
                 // get host route
-
+                //string route = AppDomain.CurrentDomain.BaseDirectory + "GAMA\\";
 
                 var folders = GetFolders(route);
                 var files = GetFiles(route);

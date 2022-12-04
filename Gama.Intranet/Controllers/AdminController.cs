@@ -302,12 +302,12 @@ namespace Gama.Intranet.Controllers
 
         [HttpPost]
         [Route("SavePermissions")]
-        public IActionResult SavePermissions([FromBody] List<UpdatePermissionsDAO> obj)
+        public IActionResult SavePermissions([FromBody] List<UpdatePermissionsDAO> update)
         {
             GenericDTO dto = new GenericDTO();
             try
             {
-                adminDAO.UpdatePermissionsUser(obj);
+                adminDAO.UpdatePermissionsUser(update);
                 dto.Status = 1;
                 dto.Message = "Success";
                 dto.Data = null;
