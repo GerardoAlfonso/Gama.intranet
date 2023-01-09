@@ -123,8 +123,6 @@ namespace Gama.Intranet.BL.Implements
             }
         }
 
-
-
         //public string GetUserName(string username)
         //{
         //    var result = context.Usuario.FirstOrDefault(x => x.Name == username);

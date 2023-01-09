@@ -20,12 +20,14 @@ namespace Gama.Intranet.Controllers
         private readonly FilesDAO filesDAO;
         private readonly AuthDAO authDAO;
         private readonly IWebHostEnvironment environment;
+        private readonly LogsDAO logsDAO;
 
-        public FilesController(FilesDAO filesDAO, AuthDAO authDAO, IWebHostEnvironment environment)
+        public FilesController(FilesDAO filesDAO, AuthDAO authDAO, IWebHostEnvironment environment, LogsDAO logsDAO)
         {
             this.filesDAO = filesDAO;
             this.authDAO = authDAO;
             this.environment = environment;
+            this.logsDAO = logsDAO;
         }
 
         //
@@ -151,16 +153,22 @@ namespace Gama.Intranet.Controllers
                 string route = filesDTO.Route;
                 string[] directories = route.Split(Path.DirectorySeparatorChar);
                 int position = directories.Length - 1;
+                string path = RoutePrivateFiles("");
 
                 var a = authDAO.VerifyPermission(filesDTO.IdUser, directories[position]);
                 if (!a)
                 {
-                    fileResponseDTO.Status = 2;
-                    fileResponseDTO.Message = "No tiene permiso para ver esta carpeta";
-                    fileResponseDTO.Folders = null;
-                    fileResponseDTO.Files = null;
-                    return Ok(fileResponseDTO);
+                    if(path != filesDTO.Route)
+                    {
+                        fileResponseDTO.Status = 2;
+                        fileResponseDTO.Message = "No tiene permiso para ver esta carpeta";
+                        fileResponseDTO.Folders = null;
+                        fileResponseDTO.Files = null;
+                        return Ok(fileResponseDTO);
+                    }
                 }
+
+
 
 
                 // get host route
@@ -254,7 +262,9 @@ namespace Gama.Intranet.Controllers
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var filepath = path + "\\" + name;
             var cadena = name.Substring((name.Length - 4), 4);
-            
+
+            logsDAO.WriteLog(new Logs(2, "Archivos", "Descarga de archivo", 1, DateTime.Now));
+
             if (cadena == ".pdf") 
             {
                 return File(System.IO.File.ReadAllBytes(filepath), "document/pdf", System.IO.Path.GetFileName(filepath));

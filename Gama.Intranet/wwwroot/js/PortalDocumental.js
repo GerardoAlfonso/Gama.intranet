@@ -34,7 +34,7 @@ function PrintFilesAndFolders(folders, files) {
     var html = '';
     var name = "";
     folders.forEach((element) => {
-        html += '<div class="col-lg-3 mb-2 contenedor">'
+        html += '<div class="col-lg-2 mb-2 contenedor">'
         html += '    <div class="card bg-light rounded p-4 mb-4">'
         html += '        <center><i class="fa fa-3x fa-folder-open text-primary mb-4"></i></center>'
         html += '        <div class=contenedor > <center><h7 class="mb-4">' + element + '<span class="d-block text-body"></span></h7></center></div>'
@@ -47,7 +47,7 @@ function PrintFilesAndFolders(folders, files) {
     html = '';
 
     files.forEach((element) => {
-        html += '<div class="col-lg-3 mb-2 contenedor">'
+        html += '<div class="col-lg-2 mb-2 contenedor">'
         html += '    <div class="card bg-light rounded p-4 mb-4">'
         html += '        <center><i class="fa fa-3x fa-file-pdf text-primary mb-4"></i></center>'
         html += '        <div class=contenedor > <center><h7 class="mb-4">' + element + '<span class="d-block text-body"></span></h7></center></div>'
